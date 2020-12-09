@@ -1,6 +1,7 @@
 {
     "extends": [
-      "wesbos"
+      "airbnb",
+      "prettier"
     ],
     "rules": {
       "no-console": 2,
@@ -10,7 +11,7 @@
           "trailingComma": "es5",
           "singleQuote": true,
           "printWidth": 120,
-          "tabWidth": 4,
+          "tabWidth": 2,
           "endOfLine":"auto"
         }
       ]
