@@ -1,6 +1,6 @@
 import Map from './Map';
 import RequestForAPI from './requestForAPI';
-import './sass/style.css';
+import './sass/style.scss';
 
 // const map = new Map();
 
