@@ -1,11 +1,9 @@
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import CovidData from './CovidData';
 
 export default class Map {
   constructor() {
     this.createMap();
-    this.CovidData = new CovidData();
     this.countries = null;
     this.getCountries();
   }
@@ -26,18 +24,12 @@ export default class Map {
     }).addTo(this.map);
   }
 
-  getCountries() {
-    CovidData.loadData('summary')
-      .then((data) => {
-        this.date = data.Date;
-        this.countries = data.Countries.sort((a, b) => b.TotalConfirmed - a.TotalConfirmed);
-      })
-      .then(() => CovidData.loadData(`live/country/${this.countries[0].Slug}/status/confirmed/date/${this.date}`))
-      .then((data) => {
-        // this.getLatLon(data);
-        console.log(data);
-        console.log(this.date);
-      });
+  static setCountry(country) {
+    console.log(country);
+  }
+
+  static setLatLon(data) {
+    console.log(data);
   }
 
   getLatLon(data) {
