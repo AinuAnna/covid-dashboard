@@ -1,11 +1,10 @@
 const fetch = require('node-fetch');
 
-const BASE_URL = `https://api.covid19api.com/`;
+const BASE_URL = `https://disease.sh/v3/covid-19/`;
 const URLS = {
-  Summary: `${BASE_URL}summary`,
-  World: `${BASE_URL}world`,
-  Live: (country) => `${BASE_URL}live/country/${country}`,
-  Total: `${BASE_URL}world/total`,
+  Summary: `${BASE_URL}countries`,
+  Historical: (country) => `${BASE_URL}historical/${country}?lastdays=all`,
+  Total: `${BASE_URL}historical/all?lastdays=all`,
 };
 
 export default class RequestForAPI {
@@ -21,7 +20,11 @@ export default class RequestForAPI {
     return RequestForAPI.loadData(URLS.Summary);
   }
 
-  static async getLive(country) {
-    return RequestForAPI.loadData(URLS.Live(country));
+  static async getHistorical(country) {
+    return RequestForAPI.loadData(URLS.Historical(country));
+  }
+
+  static async getTotal() {
+    return RequestForAPI.loadData(URLS.Total());
   }
 }
