@@ -1,0 +1,115 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 0;
+  line-height: 1.5;
+  font-weight: 400;
+  background: #222;
+  color: rgb(235, 235, 235);
+}
+
+h1 {
+  font-size: 18px;
+  text-align: center;
+}
+
+header,
+footer,
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header,
+footer {
+  height: 50px;
+  background: #222;
+  border: 1px solid #ded;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: calc(100vh - 165px);
+  margin: 0.5rem 0;
+}
+.container .container__left,
+.container .container__right {
+  flex-direction: column;
+  justify-content: center;
+}
+.container .container__right .tables,
+.container .container__right .chart {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 50%;
+}
+.container .map {
+  flex: 1;
+  margin: 0 0.5rem;
+  background: #222;
+  border: 1px solid #ded;
+  flex-grow: 3;
+}
+.content-box {
+  width: 100%;
+  padding: 0 0.5rem;
+  background: #222;
+  border: 1px solid #ded;
+}
+.content-box.global {
+  height: 10rem;
+  margin-bottom: 0.5rem;
+}
+.content-box.country {
+  height: 100%;
+}
+.content-box.date {
+  height: 5rem;
+  margin-top: 0.5rem;
+}
+.content-box#deaths {
+  width: 17em;
+  margin-right: 0.5rem;
+}
+.content-box#state {
+  width: 17em;
+  margin-left: 0.25rem;
+}
+.content-box#daily {
+  margin-top: 0.5rem;
+  width: 35em;
+}
+/* CHART */
+.chart {
+  max-width: 100%;
+  max-height: 100%;
+}
+/* FOOTER */
+footer {
+  height: 100%;
+  padding: 5px;
+  display: flex;
+}
+footer a {
+  text-decoration: none;
+  color: #fff;
+}
+footer a:hover {
+  color: coral;
+}
+.footer__RS-logo {
+  margin: 1rem 0;
+  width: 8rem;
+  margin-right: 100px;
+}
+.footer__RS-logo:hover {
+  opacity: 0.8;
+}
