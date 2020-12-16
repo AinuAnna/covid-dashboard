@@ -67,9 +67,15 @@ footer {
 .content-box.global {
   height: 10rem;
   margin-bottom: 0.5rem;
+  text-align: center;
 }
 .content-box.country {
   height: 100%;
+  overflow: auto;
+}
+.country__table {
+  display: flex;
+  justify-content: space-between;
 }
 .content-box.date {
   height: 5rem;
@@ -78,6 +84,17 @@ footer {
 .content-box#deaths {
   width: 17em;
   margin-right: 0.5rem;
+  overflow: auto;
+  :first-child {
+    text-align: center;
+  }
+}
+.dlobal-death {
+  text-align: center;
+}
+.deaths__table {
+  display: flex;
+  justify-content: space-between;
 }
 .content-box#state {
   width: 17em;

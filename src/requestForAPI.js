@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+// const fetch = require('node-fetch');
 
 const BASE_URL = `https://disease.sh/v3/covid-19/`;
 const URLS = {
@@ -6,7 +6,6 @@ const URLS = {
   Historical: (country) => `${BASE_URL}historical/${country}?lastdays=all`,
   Total: `${BASE_URL}historical/all?lastdays=all`,
 };
-
 export default class RequestForAPI {
   constructor() {
     this.data = null;
@@ -26,5 +25,37 @@ export default class RequestForAPI {
 
   static async getTotal() {
     return RequestForAPI.loadData(URLS.Total());
+  }
+
+  setData(data) {
+    this.data = data;
+  }
+
+  getCountriesWithLatLonAndCases() {
+    return this.data.map((el) => {
+      return {
+        country: el.country,
+        latLon: [el.countryInfo.lat, el.countryInfo.long],
+        cases: el.cases,
+      };
+    });
+  }
+
+  getCountriesAndCases() {
+    return this.data.map((el) => {
+      return {
+        cases: el.cases,
+        country: el.country,
+      };
+    });
+  }
+
+  getDeathsCases() {
+    return this.data.map((el) => {
+      return {
+        deaths: el.deaths,
+        country: el.country,
+      };
+    });
   }
 }

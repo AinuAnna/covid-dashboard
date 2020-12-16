@@ -1,29 +1,80 @@
 export default class Tables {
   constructor() {
-    this.dataByCases = {};
+    this.dataByCases = [];
+    this.dataByDeaths = [];
+    this.cases = null;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  createDiv() {
-    this.dataByCases.flat();
-    console.log(this.dataByCases);
-    this.dataByCases.map(() => {
+  createDivGlobal() {
+    const TABLE = document.getElementById('global-cases');
+    const createDivGlobal = document.createElement('div');
+    createDivGlobal.innerHTML = `<span>${this.dataGlobalCases}</span>`;
+    TABLE.appendChild(createDivGlobal);
+  }
+
+  setGlobalCases(cases) {
+    this.cases = cases;
+    this.dataGlobalCases = cases.reduce((acc, item) => {
+      return acc + item.cases;
+    }, 0);
+    this.createDivGlobal();
+  }
+
+  createDivCases() {
+    for (let i = 0; i < this.dataByCases.length; i += 1) {
       const TABLE = document.getElementById('cases-by-country');
-      const createDiv = document.createElement('div');
-      createDiv.className = 'country__table';
-      createDiv.innerHTML = `<span>${this.dataByCases.cases}</span><span>${this.dataByCases.country}</span>`;
-      TABLE.appendChild(createDiv);
-    });
+      const createDivCases = document.createElement('div');
+      createDivCases.className = 'country__table';
+      createDivCases.innerHTML = `<span>${this.dataByCases[i].cases}</span><span>${this.dataByCases[i].country}</span>`;
+      TABLE.appendChild(createDivCases);
+    }
   }
 
-  setCasesByCountry(data) {
-    this.dataByCases = data.map((item) => {
+  setCasesByCountry(cases) {
+    this.cases = cases;
+    this.dataByCases = cases.map((item) => {
       return {
         cases: item.cases,
         country: item.country,
       };
     });
-    console.log(this.dataByCases);
-    this.createDiv();
+    this.createDivCases();
+  }
+
+  createDivDeaths() {
+    for (let i = 0; i < this.dataByDeaths.length; i += 1) {
+      const TABLE = document.getElementById('deaths');
+      const createDivDeaths = document.createElement('div');
+      createDivDeaths.className = 'deaths__table';
+      createDivDeaths.innerHTML = `<span>${this.dataByDeaths[i].deaths}</span><span>${this.dataByDeaths[i].country}</span>`;
+      TABLE.appendChild(createDivDeaths);
+    }
+  }
+
+  setCasesByDeaths(cases) {
+    this.cases = cases;
+    this.dataByDeaths = cases.map((item) => {
+      return {
+        deaths: item.deaths,
+        country: item.country,
+      };
+    });
+    this.createDivDeaths();
+  }
+
+  createDivGlobalDeaths() {
+    const TABLE = document.getElementById('deaths');
+    const createDivDeaths = document.createElement('div');
+    createDivDeaths.className = 'dlobal-death';
+    createDivDeaths.innerHTML = `<span>${this.dataByDeaths}</span>`;
+    TABLE.appendChild(createDivDeaths);
+  }
+
+  setGlobalDeathsCases(deaths) {
+    this.deaths = deaths;
+    this.dataByDeaths = deaths.reduce((acc, item) => {
+      return acc + item.deaths;
+    }, 0);
+    this.createDivGlobalDeaths();
   }
 }
