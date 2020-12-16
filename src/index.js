@@ -3,7 +3,7 @@ import './sass/style.scss';
 import Chart from './chart';
 
 const chart = new Chart();
-function FormatData(data) {
+function formatData(data) {
   const timeline = Object.keys(data.timeline.cases)
     .concat(Object.keys(data.timeline.deaths))
     .concat(Object.keys(data.timeline.recovered));
@@ -25,8 +25,8 @@ function FormatData(data) {
 function update() {
   RequestForAPI.getSummary().then((data) => {
     console.log(data);
-    RequestForAPI.getHistorical('belarus').then((data2) => {
-      chart.setData(FormatData(data2));
+    RequestForAPI.getHistorical('belarus').then((history) => {
+      chart.setData(formatData(history));
     });
   });
 }
