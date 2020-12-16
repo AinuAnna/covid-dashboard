@@ -11,7 +11,7 @@
     </header>
 
     <div class="container">
-      <section class="left">
+      <section class="container__left">
         <div class="content-box global">
           <div>Global Cases</div>
         </div>
@@ -23,43 +23,36 @@
         </div>
       </section>
 
-      <section id="map" class="main"></section>
+      <section id="map" class="map">Holy Grail Layout</section>
 
-      <section class="right">
-        <div class="top">
-          <div class="content-box" id="one">
+      <section class="container__right">
+        <div class="tables">
+          <div class="content-box" id="deaths">
             <div>Global Deaths</div>
           </div>
-          <div class="content-box" id="two">
+          <div class="content-box" id="state">
             <div>US State Level</div>
           </div>
         </div>
-        <div class="bottom">
-          <div class="content-box" id="three">
+        <div class="chart">
+          <div class="content-box" id="daily">
             <div>Daily Cases</div>
+            <canvas id="myChart" class="chart"></canvas>
           </div>
         </div>
       </section>
     </div>
 
     <footer>
-      <div class="footer__content">
-        <a href="https://rs.school/js/">
-          <img
-            src="./assets/logo-rsschool3.png"
-            alt="RS-Shool"
-            class="footer__RS-logo"
-          />
-        </a>
-        <div class="contacts">
-          <ul>
-            <li><a href="https://github.com/AinuAnna">AinuAnna</a></li>
-            <li><a href="https://github.com/Saylance2503">Saylance2503</a></li>
-            <li>
-              <a href="https://github.com/maxim-tihomirov">Maxim-Tihomirov</a>
-            </li>
-          </ul>
-        </div>
+      <a href="https://rs.school/js/">
+        <img src="./assets/logo-rsschool3.png" alt="RS-Sсhool" class="footer__RS-logo" width="100" height="50" />
+      </a>
+      <div class="contacts">
+        <ul>
+          <li><a href="https://github.com/AinuAnna">AinuAnna</a></li>
+          <li><a href="https://github.com/Saylance2503">Saylance2503</a></li>
+          <li><a href="https://github.com/maxim-tihomirov">Maxim-Tihomirov</a></li>
+        </ul>
       </div>
     </footer>
   </body>

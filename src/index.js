@@ -1,8 +1,12 @@
 import RequestForAPI from './requestForAPI';
+import Map from './Map';
 import './sass/style.scss';
 // import Chart from './chart';
 
 // const chart = new Chart();
+const map = new Map();
+const requestForAPI = new RequestForAPI();
+
 function formatData(data) {
   const timeline = Object.keys(data.timeline.cases)
     .concat(Object.keys(data.timeline.deaths))
@@ -23,7 +27,9 @@ function formatData(data) {
 
 function update() {
   RequestForAPI.getSummary().then((data) => {
-    console.log(data);
+    requestForAPI.setData(data);
+    map.setData(requestForAPI.getCountriesWithLatLonAndCases());
+    map.paintCircle();
     RequestForAPI.getHistorical('belarus').then((data2) => {
       // chart.setData(FormatData(data2));
     });

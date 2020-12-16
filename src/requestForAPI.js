@@ -26,4 +26,18 @@ export default class RequestForAPI {
   static async getTotal() {
     return RequestForAPI.loadData(URLS.Total());
   }
+
+  setData(data) {
+    this.data = data;
+  }
+
+  getCountriesWithLatLonAndCases() {
+    return this.data.map((el) => {
+      return {
+        country: el.country,
+        latLon: [el.countryInfo.lat, el.countryInfo.long],
+        cases: el.cases,
+      };
+    });
+  }
 }

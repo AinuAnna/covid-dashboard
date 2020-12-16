@@ -1,11 +1,10 @@
-import L from 'leaflet';
+import L, { tooltip } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 export default class Map {
   constructor() {
     this.createMap();
     this.countries = null;
-    this.getCountries();
   }
 
   createMap() {
@@ -15,25 +14,46 @@ export default class Map {
     }).addTo(this.map);
   }
 
-  addCircle() {
-    const circle = L.circle([51.508, -0.11], {
+  addCircle(country, arrayLatLon, cases) {
+    const circle = L.circle(arrayLatLon, {
       color: 'red',
       fillColor: '#f03',
       fillOpacity: 0.5,
-      radius: 500,
+      opacity: 0.5,
+      weight: 0.5,
+      radius: Map.getRadius(cases),
     }).addTo(this.map);
+    // const tooltip = L.tooltip(direction:)
+    circle.bindTooltip(`${country}, ${cases}`);
   }
 
-  static setCountry(country) {
-    console.log(country);
+  setData(countries) {
+    this.countries = countries;
   }
 
-  static setLatLon(data) {
-    console.log(data);
+  paintCircle() {
+    this.countries.map((el) => {
+      return this.addCircle(el.country, el.latLon, el.cases);
+    });
   }
 
-  getLatLon(data) {
-    this.Lat = data.Lat;
-    this.Lon = data.Lon;
+  deleteAllMarkers() {
+    // TODO:
+  }
+
+  static getRadius(cases) {
+    let result;
+    if (cases > 10000000) {
+      result = cases / 10;
+    } else if (cases > 1000000) {
+      result = cases / 5;
+    } else if (cases > 100000) {
+      result = cases / 3;
+    } else if (cases > 10000) {
+      result = cases / 2;
+    } else {
+      result = cases;
+    }
+    return result;
   }
 }
