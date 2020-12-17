@@ -1,7 +1,6 @@
 const Chart = require('chart.js');
 
 const getMonthKey = (date) => `${date.getFullYear()}_${date.getMonth()}`;
-
 export default class Charts {
   constructor() {
     this.months = [];
@@ -11,30 +10,30 @@ export default class Charts {
   setData(data) {
     this.initMonths();
     const grouppedData = data.flat().reduce((result, item) => {
-      const date = new Date(item.Date);
+      const date = new Date(item.date);
       const monthKey = getMonthKey(date);
 
       const monthData =
         result[monthKey] ||
         (result[monthKey] = {
-          Cases: 0,
-          Deaths: 0,
-          Recovered: 0,
+          cases: 0,
+          deaths: 0,
+          recovered: 0,
         });
-      monthData.Cases += item.Cases;
-      monthData.Deaths += item.Deaths;
-      monthData.Recovered += item.Recovered;
+      monthData.cases += item.cases;
+      monthData.deaths += item.deaths;
+      monthData.recovered += item.recovered;
 
       return result;
     }, {});
 
     this.dataSets = [
-      { key: 'Cases', label: 'Cases cases', borderColor: 'rgb(255, 99, 132)' },
-      { key: 'Deaths', label: 'Deaths cases', borderColor: 'rgb(55, 99, 132)' },
-      { key: 'Recovered', label: 'Recovered cases', borderColor: 'rgb(105, 99, 132)' },
-    ].map((x) => ({
-      ...x,
-      data: this.months.map((month) => (grouppedData[getMonthKey(month)] || {})[x.key] || 0),
+      { key: 'cases', label: 'Active cases', borderColor: 'rgb(255, 99, 132)' },
+      { key: 'deaths', label: 'Deaths cases', borderColor: 'rgb(55, 99, 132)' },
+      { key: 'recovered', label: 'Recovered cases', borderColor: 'rgb(25, 99, 132)' },
+    ].map((el) => ({
+      ...el,
+      data: this.months.map((month) => (grouppedData[getMonthKey(month)] || {})[el.key] || 0),
     }));
 
     this.render();
@@ -42,7 +41,7 @@ export default class Charts {
 
   initMonths() {
     this.months = [];
-    let date = new Date('2020-01-01T00:00:00Z');
+    let date = new Date('2020-03-01T00:00:00Z');
 
     while (date <= new Date()) {
       this.months.push(date);

@@ -27,4 +27,55 @@ export default class RequestForAPI {
   static async getTotal() {
     return RequestForAPI.loadData(URLS.Total());
   }
+
+  setData(data) {
+    this.data = data;
+  }
+
+  getCountriesWithLatLonAndCases() {
+    return this.data.map((el) => {
+      return {
+        country: el.country,
+        latLon: [el.countryInfo.lat, el.countryInfo.long],
+        cases: el.cases,
+      };
+    });
+  }
+
+  getCountriesAndCases() {
+    return this.data.map((el) => {
+      return {
+        cases: el.cases,
+        country: el.country,
+      };
+    });
+  }
+
+  getDeathsCases() {
+    return this.data.map((el) => {
+      return {
+        deaths: el.deaths,
+        country: el.country,
+      };
+    });
+  }
+
+  getHistoricalData() {
+    const dataTimeline = this.data.timeline;
+    const merged = [
+      ...new Set(
+        Object.keys(dataTimeline.cases),
+        Object.keys(dataTimeline.deaths),
+        Object.keys(dataTimeline.recovered)
+      ),
+    ];
+    return merged.map((el) => {
+      return {
+        date: new Date(el),
+        cases: dataTimeline.cases[el],
+        deaths: dataTimeline.deaths[el],
+        recovered: dataTimeline.recovered[el],
+      };
+    });
+  }
 }
