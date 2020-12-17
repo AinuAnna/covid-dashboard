@@ -35,6 +35,7 @@ export default class RequestForAPI {
     return this.data.map((el) => {
       return {
         country: el.country,
+        iso3: el.countryInfo.iso3,
         latLon: [el.countryInfo.lat, el.countryInfo.long],
         cases: el.cases,
       };

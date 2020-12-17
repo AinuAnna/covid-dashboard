@@ -28,8 +28,10 @@ function formatData(data) {
 function update() {
   RequestForAPI.getSummary().then((data) => {
     requestForAPI.setData(data);
+    //console.log(data);
     map.setData(requestForAPI.getCountriesWithLatLonAndCases());
-    map.paintCircle();
+    // map.paintCircle();
+    map.addGeoJSON();
     RequestForAPI.getHistorical('belarus').then((data2) => {
       // chart.setData(FormatData(data2));
     });

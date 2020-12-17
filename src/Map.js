@@ -1,6 +1,8 @@
 import L, { tooltip } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
+import geo from './custom.geo.json';
+
 export default class Map {
   constructor() {
     this.createMap();
@@ -14,14 +16,47 @@ export default class Map {
     }).addTo(this.map);
   }
 
+  addGeoJSON() {
+    L.geoJSON(geo, { style: this.addStyle.call }).addTo(this.map);
+  }
+
+  addStyle(feature) {
+    return {
+      fillColor: this.getColor(feature.properties.sov_a3),
+      weight: 2,
+      opacity: 1,
+      color: 'white',
+      dashArray: '3',
+      fillOpacity: 0.7,
+    };
+  }
+
+  getColor(country) {
+    console.log(country);
+    const currentCountry = this.countries.filter((cur) => cur.iso3 === country);
+    let result;
+    if (currentCountry.cases > 10000000) {
+      result = '#800026';
+    } else if (currentCountry.cases > 1000000) {
+      result = '#BD0026';
+    } else if (currentCountry.cases > 100000) {
+      result = '#E31A1C';
+    } else if (currentCountry.cases > 10000) {
+      result = '#FD8D3C';
+    } else {
+      result = '#FED976';
+    }
+    return result;
+  }
+
   addCircle(country, arrayLatLon, cases) {
-    const circle = L.circle(arrayLatLon, {
+    const circle = L.circleMarker(arrayLatLon, {
       color: 'red',
       fillColor: '#f03',
       fillOpacity: 0.5,
       opacity: 0.5,
       weight: 0.5,
-      radius: Map.getRadius(cases),
+      radius: 20,
     }).addTo(this.map);
     // const tooltip = L.tooltip(direction:)
     circle.bindTooltip(`${country}, ${cases}`);
@@ -44,13 +79,13 @@ export default class Map {
   static getRadius(cases) {
     let result;
     if (cases > 10000000) {
-      result = cases / 10;
+      result = cases / 100;
     } else if (cases > 1000000) {
-      result = cases / 5;
+      result = cases / 50;
     } else if (cases > 100000) {
-      result = cases / 3;
+      result = cases / 30;
     } else if (cases > 10000) {
-      result = cases / 2;
+      result = cases / 20;
     } else {
       result = cases;
     }
