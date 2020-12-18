@@ -36,47 +36,54 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: calc(100vh - 165px);
+  height: calc(100vh - 166px);
   margin: 0.5rem 0;
 }
-.container .container__left,
-.container .container__right {
+.container > section {
   flex-direction: column;
   justify-content: center;
 }
-.container .container__right .tables,
-.container .container__right .chart {
+.container__right > div {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   height: 50%;
+  margin-bottom: 0.5rem;
 }
 .container .map {
   flex: 1;
   margin: 0 0.5rem;
   background: #222;
-  border: 1px solid #ded;
   flex-grow: 3;
 }
 .content-box {
   width: 100%;
+  height: 100%;
   padding: 0 0.5rem;
   background: #222;
   border: 1px solid #ded;
-}
-.content-box.global {
-  height: 10rem;
-  margin-bottom: 0.5rem;
-}
-.content-box.country {
-  height: 100%;
-}
-.content-box.date {
-  height: 5rem;
-  margin-top: 0.5rem;
+  margin: 0 5px;
+  &.global {
+    height: 10rem;
+    margin-bottom: 0.5rem;
+  }
+  &.country {
+    height: 100%;
+  }
+  &.date {
+    height: 5rem;
+    margin-top: 0.5rem;
+  }
+  &.expanded .expand {
+    background: url(../assets/collapse.svg) center center no-repeat;
+    margin-left: -8px;
+    margin-top: 0px;
+    height: 16px;
+    width: 16px;
+  }
 }
 .content-box#deaths {
-  width: 17em;
+  width: 17.2em;
   margin-right: 0.5rem;
 }
 .content-box#state {
@@ -86,19 +93,44 @@ footer {
 .content-box#daily {
   margin-top: 0.5rem;
   width: 35em;
+  overflow: hidden;
+}
+.expand {
+  position: absolute;
+  margin-left: -8px;
+  margin-top: 0px;
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+  background: url(../assets/expand.svg) center center no-repeat;
+  transition: opacity 0.25s ease-out;
+}
+.expanded {
+  z-index: inherit;
+  position: absolute;
+  display: block;
+  width: 100% !important;
+  height: calc(100vh - 165px) !important;
+  top: 58px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding-left: 8px;
+  margin: 0 !important;
 }
 /* FOOTER */
 footer {
   height: 100%;
   padding: 5px;
   display: flex;
-}
-footer a {
-  text-decoration: none;
-  color: #fff;
-}
-footer a:hover {
-  color: coral;
+  a {
+    text-decoration: none;
+    color: #fff;
+
+    &:hover {
+      color: coral;
+    }
+  }
 }
 .footer__RS-logo {
   margin: 1rem 0;
@@ -107,4 +139,7 @@ footer a:hover {
 }
 .footer__RS-logo:hover {
   opacity: 0.8;
+}
+.wrapper {
+  padding: 16px;
 }
