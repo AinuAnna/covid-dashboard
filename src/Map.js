@@ -1,12 +1,52 @@
-import L, { tooltip } from 'leaflet';
+import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-
 import geo from './custom.geo.json';
+
+const GRADE = {
+  First: 10000000,
+  Second: 1000000,
+  Third: 100000,
+  Fourth: 10000,
+  Fifth: 1000,
+};
 
 export default class Map {
   constructor() {
     this.createMap();
     this.countries = null;
+    this.createInfoBlock();
+    this.createLegend();
+
+    this.addStyle = (feature) => {
+      return {
+        fillColor: Map.getColor(this.getCasesOfCountry(feature.properties.iso_a3)),
+        weight: 1,
+        opacity: 0.5,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7,
+      };
+    };
+
+    this.onEachFeature = (feature, layer) => {
+      layer.on({
+        mouseover: this.highlightFeature,
+        mouseout: this.resetHighlight,
+      });
+    };
+
+    this.highlightFeature = (e) => {
+      this.layer = e.target;
+      this.info.update(this.layer.feature.properties);
+      this.layer.setStyle({
+        fillOpacity: 0.5,
+      });
+    };
+
+    this.resetHighlight = (e) => {
+      this.geojson.resetStyle(e.target);
+      this.info.update();
+    };
   }
 
   createMap() {
@@ -16,79 +56,69 @@ export default class Map {
     }).addTo(this.map);
   }
 
-  addGeoJSON() {
-    L.geoJSON(geo, { style: this.addStyle.call }).addTo(this.map);
+  updateMap() {
+    this.geojson = L.geoJSON(geo, { style: this.addStyle, onEachFeature: this.onEachFeature }).addTo(this.map);
   }
 
-  addStyle(feature) {
-    return {
-      fillColor: this.getColor(feature.properties.sov_a3),
-      weight: 2,
-      opacity: 1,
-      color: 'white',
-      dashArray: '3',
-      fillOpacity: 0.7,
-    };
-  }
-
-  getColor(country) {
-    console.log(country);
+  getCasesOfCountry(country) {
     const currentCountry = this.countries.filter((cur) => cur.iso3 === country);
-    let result;
-    if (currentCountry.cases > 10000000) {
-      result = '#800026';
-    } else if (currentCountry.cases > 1000000) {
-      result = '#BD0026';
-    } else if (currentCountry.cases > 100000) {
-      result = '#E31A1C';
-    } else if (currentCountry.cases > 10000) {
-      result = '#FD8D3C';
-    } else {
-      result = '#FED976';
+    if (currentCountry[0] === undefined) return '#fff';
+    return currentCountry[0].cases;
+  }
+
+  static getColor(number) {
+    if (number > GRADE.First) {
+      return '#800026';
     }
-    return result;
+    if (number > GRADE.Second) {
+      return '#BD0026';
+    }
+    if (number > GRADE.Third) {
+      return '#E31A1C';
+    }
+    if (number > GRADE.Fourth) {
+      return '#FD8D3C';
+    }
+    return '#FED976';
   }
 
-  addCircle(country, arrayLatLon, cases) {
-    const circle = L.circleMarker(arrayLatLon, {
-      color: 'red',
-      fillColor: '#f03',
-      fillOpacity: 0.5,
-      opacity: 0.5,
-      weight: 0.5,
-      radius: 20,
-    }).addTo(this.map);
-    // const tooltip = L.tooltip(direction:)
-    circle.bindTooltip(`${country}, ${cases}`);
-  }
-
-  setData(countries) {
+  updateData(countries) {
     this.countries = countries;
+    this.updateMap();
   }
 
-  paintCircle() {
-    this.countries.map((el) => {
-      return this.addCircle(el.country, el.latLon, el.cases);
-    });
+  createInfoBlock() {
+    this.info = L.control({ position: 'topright' });
+    this.info.onAdd = () => {
+      this.div = L.DomUtil.create('div', 'map-info');
+      this.info.update();
+      return this.div;
+    };
+
+    this.info.update = (props) => {
+      const currentCountry = this.countries && props ? this.countries.filter((cur) => cur.iso3 === props.iso_a3) : 0;
+
+      this.div.innerHTML =
+        currentCountry && props ? `${currentCountry[0].country} — ${currentCountry[0].cases}` : `Hover over a country`;
+    };
+    this.info.addTo(this.map);
   }
 
-  deleteAllMarkers() {
-    // TODO:
-  }
+  createLegend() {
+    this.legend = L.control({ position: 'bottomright' });
 
-  static getRadius(cases) {
-    let result;
-    if (cases > 10000000) {
-      result = cases / 100;
-    } else if (cases > 1000000) {
-      result = cases / 50;
-    } else if (cases > 100000) {
-      result = cases / 30;
-    } else if (cases > 10000) {
-      result = cases / 20;
-    } else {
-      result = cases;
-    }
-    return result;
+    this.legend.onAdd = () => {
+      const div = L.DomUtil.create('div', 'map-info map-legend');
+      const grades = [GRADE.First, GRADE.Second, GRADE.Third, GRADE.Fourth, GRADE.Fifth];
+      grades.forEach((element, index) => {
+        const container = L.DomUtil.create('div', 'map-legend__container');
+        container.innerHTML += `<i style="background: ${Map.getColor(element + 1)}"></i> 
+          ${element} 
+          ${grades[index + 1] ? `—  ${grades[index + 1]}` : '-'}`;
+        div.append(container);
+      });
+      return div;
+    };
+    this.legend.addTo(this.map);
   }
 }
