@@ -48,3 +48,4 @@ function update() {
 }
 
 update();
+table.onClickCountry();

@@ -1,3 +1,5 @@
+import { EvalDevToolModulePlugin } from 'webpack';
+
 export default class Tables {
   constructor() {
     this.dataByCases = [];
@@ -5,10 +7,10 @@ export default class Tables {
     this.cases = null;
   }
 
-  createDivGlobal() {
+  createDivGlobal(element) {
     const TABLE = document.getElementById('global-cases');
     const createDivGlobal = document.createElement('div');
-    createDivGlobal.innerHTML = `<span>${this.dataGlobalCases}</span>`;
+    createDivGlobal.innerHTML = `<span>${element}</span>`;
     TABLE.appendChild(createDivGlobal);
   }
 
@@ -17,7 +19,7 @@ export default class Tables {
     this.dataGlobalCases = cases.reduce((acc, item) => {
       return acc + item.cases;
     }, 0);
-    this.createDivGlobal();
+    this.createDivGlobal(this.dataGlobalCases);
   }
 
   createDivCases() {
@@ -25,6 +27,7 @@ export default class Tables {
       const TABLE = document.getElementById('cases-by-country');
       const createDivCases = document.createElement('div');
       createDivCases.className = 'country__table';
+      createDivCases.setAttribute('data-cases', this.dataByCases[i].cases);
       createDivCases.innerHTML = `<span>${this.dataByCases[i].cases}</span><span>${this.dataByCases[i].country}</span>`;
       TABLE.appendChild(createDivCases);
     }
@@ -62,11 +65,11 @@ export default class Tables {
     this.createDivDeaths();
   }
 
-  createDivGlobalDeaths() {
+  createDivGlobalDeaths(element) {
     const TABLE = document.getElementById('deaths');
     const createDivDeaths = document.createElement('div');
     createDivDeaths.className = 'dlobal-death';
-    createDivDeaths.innerHTML = `<span>${this.dataByDeaths}</span>`;
+    createDivDeaths.innerHTML = `<span>${element}</span>`;
     TABLE.appendChild(createDivDeaths);
   }
 
@@ -75,6 +78,17 @@ export default class Tables {
     this.dataByDeaths = deaths.reduce((acc, item) => {
       return acc + item.deaths;
     }, 0);
-    this.createDivGlobalDeaths();
+    this.createDivGlobalDeaths(this.dataByDeaths);
+  }
+
+  // TODO Передача дата сет
+  onClickCountry() {
+    const elements = document.getElementById('cases-by-country');
+    const element = document.getElementsByClassName('country__table');
+
+    elements.addEventListener('click', () => {
+      console.log(element);
+      // this.createDivGlobal(element.dataset.cases);
+    });
   }
 }
