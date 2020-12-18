@@ -39,13 +39,11 @@ footer {
   height: calc(100vh - 165px);
   margin: 0.5rem 0;
 }
-.container .container__left,
-.container .container__right {
+.container > section {
   flex-direction: column;
   justify-content: center;
 }
-.container .container__right .tables,
-.container .container__right .chart {
+.container__right > div {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -63,17 +61,17 @@ footer {
   padding: 0 0.5rem;
   background: #222;
   border: 1px solid #ded;
-}
-.content-box.global {
-  height: 10rem;
-  margin-bottom: 0.5rem;
-}
-.content-box.country {
-  height: 100%;
-}
-.content-box.date {
-  height: 5rem;
-  margin-top: 0.5rem;
+  &.global {
+    height: 10rem;
+    margin-bottom: 0.5rem;
+  }
+  &.country {
+    height: 100%;
+  }
+  &.date {
+    height: 5rem;
+    margin-top: 0.5rem;
+  }
 }
 .content-box#deaths {
   width: 17em;
@@ -87,18 +85,26 @@ footer {
   margin-top: 0.5rem;
   width: 35em;
 }
+/* CHART */
+.chart {
+  max-width: 100%;
+  max-height: 100%;
+}
+/* FULL-SCREEN*/
+
 /* FOOTER */
 footer {
   height: 100%;
   padding: 5px;
   display: flex;
-}
-footer a {
-  text-decoration: none;
-  color: #fff;
-}
-footer a:hover {
-  color: coral;
+  a {
+    text-decoration: none;
+    color: #fff;
+
+    &:hover {
+      color: coral;
+    }
+  }
 }
 .footer__RS-logo {
   margin: 1rem 0;
