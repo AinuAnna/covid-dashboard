@@ -35,16 +35,16 @@ export default class Map {
       });
     };
 
-    this.highlightFeature = (e) => {
-      this.layer = e.target;
+    this.highlightFeature = (event) => {
+      this.layer = event.target;
       this.info.update(this.layer.feature.properties);
       this.layer.setStyle({
         fillOpacity: 0.5,
       });
     };
 
-    this.resetHighlight = (e) => {
-      this.geojson.resetStyle(e.target);
+    this.resetHighlight = (event) => {
+      this.geojson.resetStyle(event.target);
       this.info.update();
     };
   }
@@ -62,8 +62,7 @@ export default class Map {
 
   getCasesOfCountry(country) {
     const currentCountry = this.countries.filter((cur) => cur.iso3 === country);
-    if (currentCountry[0] === undefined) return '#fff';
-    return currentCountry[0].cases;
+    return currentCountry[0] === undefined ? '#fff' : currentCountry[0].cases;
   }
 
   static getColor(number) {

@@ -10,18 +10,21 @@ const map = new Map();
 const requestForAPI = new RequestForAPI();
 
 function getSortedByCasesData(data) {
-  data.sort((a, b) => {
-    return b.cases - a.cases;
-  });
-  return data;
+  data.sort((a, b) => b.cases - a.cases);
 }
 
 function setTables(data) {
-  table.setGlobalCases(requestForAPI.getCountriesAndCases(data));
+  const global = requestForAPI.getCountriesAndCases();
+  table.setGlobalCases(global);
+
   getSortedByCasesData(data);
-  table.setCasesByCountry(requestForAPI.getCountriesAndCases());
-  table.setGlobalDeathsCases(requestForAPI.getDeathsCases(data));
-  table.setCasesByDeaths(requestForAPI.getDeathsCases());
+
+  const sortedGlobal = requestForAPI.getCountriesAndCases();
+  table.setCasesByCountry(sortedGlobal);
+
+  const deaths = requestForAPI.getDeathsCases();
+  table.setGlobalDeathsCases(deaths);
+  table.setCasesByDeaths(deaths);
 }
 
 function update() {
