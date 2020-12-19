@@ -9,40 +9,47 @@
     <header>
       <h1 class="header__logo-title">COVID-19 Dashboard</h1>
     </header>
-
     <div class="container">
       <section class="container__left">
         <div id="global-cases" class="content-box global">
-          <div>Global Cases</div>
+            <div class="expand"></div>
+          <span class = "content-box__title">Global Cases</span>
         </div>
         <div id="cases-by-country" class="content-box country">
-          <div>Cases by Country/Region/Sovereignty</div>
+            <div class="expand"></div>
+          <span class = "content-box__title">Cases by Country/Region/Sovereignty</span>
         </div>
         <div class="content-box date">
-          <div>Last Updated at (M/D/YYYY)</div>
+            <div class="expand"></div>
+          <span class = "content-box__title">Last Updated at (M/D/YYYY)</span>
         </div>
       </section>
 
-      <section class="map" id="map">Holy Grail Layout</section>
+      <section class="map" id="map">
+        <div class="content-box">
+        <div class="expand"></div>
+        </section>
 
       <section class="container__right">
         <div class="tables">
           <div class="content-box" id="deaths">
-            <div>Global Deaths</div>
+            <div class="expand"></div>
+            <span class = "content-box__title">Global Deaths</span>
           </div>
           <div class="content-box" id="state">
-            <div>US State Level</div>
+            <div class="expand"></div>
+            <span class = "content-box__title">US State Level</span>
           </div>
         </div>
         <div class="chart">
           <div class="content-box" id="daily">
-            <div>Daily Cases</div>
+            <div class="expand"></div>
+            <span class="content-box__title">Daily Cases</span>
             <canvas id="myChart" class="chart"></canvas>
           </div>
         </div>
       </section>
     </div>
-
     <footer>
       <a href="https://rs.school/js/">
         <img src="./assets/logo-rsschool3.png" alt="RS-Sсhool" class="footer__RS-logo" width="100" height="50" />

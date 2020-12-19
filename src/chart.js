@@ -1,9 +1,9 @@
 const Chart = require('chart.js');
 
 const DATASETS = [
-  { key: 'cases', label: 'Active cases', borderColor: 'rgb(255, 99, 132)' },
-  { key: 'deaths', label: 'Deaths cases', borderColor: 'rgb(55, 99, 132)' },
-  { key: 'recovered', label: 'Recovered cases', borderColor: 'rgb(25, 99, 132)' },
+  { key: 'cases', label: 'Active cases', borderColor: '#FD8D3C' },
+  { key: 'deaths', label: 'Deaths cases', borderColor: '#E31A1C' },
+  { key: 'recovered', label: 'Recovered cases', borderColor: '#FED976' },
 ];
 
 export default class Charts {

@@ -46,5 +46,16 @@ function update() {
   });
 }
 
+function setupResizeButtons() {
+  const buttons = global.document.querySelectorAll('.expand');
+
+  buttons.forEach((el) =>
+    el.addEventListener('click', function () {
+      this.parentElement.classList.toggle('expanded');
+    })
+  );
+}
 update();
+
+setupResizeButtons();
 onClickCountry();
