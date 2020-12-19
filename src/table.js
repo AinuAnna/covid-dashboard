@@ -1,5 +1,3 @@
-import { EvalDevToolModulePlugin } from 'webpack';
-
 export default class Tables {
   constructor() {
     this.dataByCases = [];

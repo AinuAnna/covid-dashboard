@@ -1,4 +1,4 @@
-// const fetch = require('node-fetch');
+const fetch = require('node-fetch');
 
 const BASE_URL = `https://disease.sh/v3/covid-19/`;
 const URLS = {
@@ -55,6 +55,25 @@ export default class RequestForAPI {
       return {
         deaths: el.deaths,
         country: el.country,
+      };
+    });
+  }
+
+  getHistoricalData() {
+    const dataTimeline = this.data.timeline;
+    const merged = [
+      ...new Set(
+        Object.keys(dataTimeline.cases),
+        Object.keys(dataTimeline.deaths),
+        Object.keys(dataTimeline.recovered)
+      ),
+    ];
+    return merged.map((el) => {
+      return {
+        date: new Date(el),
+        cases: dataTimeline.cases[el],
+        deaths: dataTimeline.deaths[el],
+        recovered: dataTimeline.recovered[el],
       };
     });
   }

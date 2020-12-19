@@ -1,8 +1,10 @@
 import RequestForAPI from './requestForAPI';
 import Table from './table';
+import Charts from './chart';
 import './sass/style.scss';
 
 const table = new Table();
+const chart = new Charts();
 const requestForAPI = new RequestForAPI();
 
 function FormatData(data) {
@@ -41,8 +43,9 @@ function update() {
     );
     table.setGlobalDeathsCases(requestForAPI.getDeathsCases());
     table.setCasesByDeaths(requestForAPI.getDeathsCases(FormatByCases(data)));
-    RequestForAPI.getHistorical('belarus').then((data2) => {
-      // chart.setData(FormatData(data2));
+    RequestForAPI.getHistorical('india').then((history) => {
+      requestForAPI.setData(history);
+      chart.setData(requestForAPI.getHistoricalData());
     });
   });
 }
