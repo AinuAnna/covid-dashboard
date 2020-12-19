@@ -80,6 +80,9 @@ footer {
     margin-top: 0px;
     height: 16px;
     width: 16px;
+    &:hover {
+      opacity: 0.5;
+    }
   }
   &.expanded {
     z-index: 999;
@@ -117,6 +120,10 @@ footer {
   cursor: pointer;
   background: url(../assets/expand.svg) center center no-repeat;
   transition: opacity 0.25s ease-out;
+
+  &:hover {
+    opacity: 0.5;
+  }
 }
 .content-box__title {
   margin-left: 20px;
