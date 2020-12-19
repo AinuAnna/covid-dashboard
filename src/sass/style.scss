@@ -81,6 +81,19 @@ footer {
     height: 16px;
     width: 16px;
   }
+  &.expanded {
+    z-index: 999;
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: calc(100vh - 165px);
+    top: 58px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding-left: 8px;
+    margin: 0;
+  }
 }
 .content-box#deaths {
   width: 17.2em;
@@ -97,27 +110,18 @@ footer {
 }
 .expand {
   position: absolute;
-  margin-left: -8px;
-  margin-top: 0px;
+  margin-right: 20px;
+  margin-top: 4px;
   height: 16px;
   width: 16px;
   cursor: pointer;
   background: url(../assets/expand.svg) center center no-repeat;
   transition: opacity 0.25s ease-out;
 }
-.expanded {
-  z-index: inherit;
-  position: absolute;
-  display: block;
-  width: 100% !important;
-  height: calc(100vh - 165px) !important;
-  top: 58px;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  padding-left: 8px;
-  margin: 0 !important;
+.content-box__title {
+  margin-left: 20px;
 }
+
 /* FOOTER */
 footer {
   height: 100%;
@@ -139,7 +143,4 @@ footer {
 }
 .footer__RS-logo:hover {
   opacity: 0.8;
-}
-.wrapper {
-  padding: 16px;
 }

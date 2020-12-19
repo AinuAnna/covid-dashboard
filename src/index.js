@@ -10,24 +10,11 @@ function update() {
 }
 
 function setupResizeButtons() {
-  const boxes = global.document.querySelectorAll('.content-box');
+  const buttons = global.document.querySelectorAll('.expand');
 
-  function toggleButton() {
-    this.parentElement.classList.toggle('expanded');
-  }
-
-  boxes.forEach((el) =>
-    el.addEventListener('mousemove', function () {
-      const span = this.querySelector('span');
-      span.classList.add('expand');
-      span.addEventListener('click', toggleButton);
-    })
-  );
-  boxes.forEach((el) =>
-    el.addEventListener('mouseleave', function () {
-      const span = this.querySelector('span');
-      span.classList.remove('expand');
-      span.removeEventListener('click', toggleButton);
+  buttons.forEach((el) =>
+    el.addEventListener('click', function () {
+      this.parentElement.classList.toggle('expanded');
     })
   );
 }
