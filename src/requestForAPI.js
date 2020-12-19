@@ -6,7 +6,6 @@ const URLS = {
   Historical: (country) => `${BASE_URL}historical/${country}?lastdays=all`,
   Total: `${BASE_URL}historical/all?lastdays=all`,
 };
-
 export default class RequestForAPI {
   constructor() {
     this.data = null;

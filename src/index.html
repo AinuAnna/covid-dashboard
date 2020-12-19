@@ -1,61 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard-COVID</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1 class="header__logo-title">COVID-19 Dashboard</h1>
+      <h1 class="header__logo-title">COVID-19 Dashboard</h1>
     </header>
 
     <div class="container">
-        <section class="container__left">
-            <div class="content-box global">
-                <div>Global Cases</div>
-            </div>
-            <div class="content-box country">
-                <div>Cases by Country/Region/Sovereignty</div>
-            </div>
-            <div class="content-box date">
-                <div>Last Updated at (M/D/YYYY)</div>
-            </div>
-        </section>
-       
-        <section class="map">Holy Grail Layout</section>
-        
-        <section class="container__right">
-            <div class="tables">
-                <div class="content-box" id="deaths">
-                    <div>Global Deaths</div>
-                </div>
-                <div class="content-box" id="state">
-                    <div>US State Level</div>
-                </div>
-            </div>
-            <div class="chart">
-                <div class="content-box" id="daily">
-                    <div>Daily Cases</div>
-                    <canvas id="myChart" class = "chart"></canvas>
-                </div>
-            </div>
-        </section>
+      <section class="container__left">
+        <div id="global-cases" class="content-box global">
+          <div>Global Cases</div>
+        </div>
+        <div id="cases-by-country" class="content-box country">
+          <div>Cases by Country/Region/Sovereignty</div>
+        </div>
+        <div class="content-box date">
+          <div>Last Updated at (M/D/YYYY)</div>
+        </div>
+      </section>
+
+      <section class="map">Holy Grail Layout</section>
+
+      <section class="container__right">
+        <div class="tables">
+          <div class="content-box" id="deaths">
+            <div>Global Deaths</div>
+          </div>
+          <div class="content-box" id="state">
+            <div>US State Level</div>
+          </div>
+        </div>
+        <div class="chart">
+          <div class="content-box" id="daily">
+            <div>Daily Cases</div>
+            <canvas id="myChart" class="chart"></canvas>
+          </div>
+        </div>
+      </section>
     </div>
 
     <footer>
-            <a href="https://rs.school/js/">
-                <img src="./assets/logo-rsschool3.png" alt="RS-Sсhool" class="footer__RS-logo" width="100" height="50" >
-            </a>
-            <div class="contacts">
-                <ul>
-                    <li><a href="https://github.com/AinuAnna">AinuAnna</a></li>
-                    <li><a href="https://github.com/Saylance2503">Saylance2503</a></li>
-                    <li><a href="https://github.com/maxim-tihomirov">Maxim-Tihomirov</a></li>
-                </ul>
-            </div>
+      <a href="https://rs.school/js/">
+        <img
+          src="./assets/logo-rsschool3.png"
+          alt="RS-Sсhool"
+          class="footer__RS-logo"
+          width="100"
+          height="50"
+        />
+      </a>
+      <div class="contacts">
+        <ul>
+          <li><a href="https://github.com/AinuAnna">AinuAnna</a></li>
+          <li><a href="https://github.com/Saylance2503">Saylance2503</a></li>
+          <li>
+            <a href="https://github.com/maxim-tihomirov">Maxim-Tihomirov</a>
+          </li>
+        </ul>
+      </div>
     </footer>
-
-</body>
+  </body>
 </html>
