@@ -14,6 +14,13 @@ function getSortedByCasesData(data) {
   return data;
 }
 
+function onClickCountry() {
+  const elements = document.getElementById('cases-by-country');
+  elements.addEventListener('click', (event) => {
+    console.log(event.target.closest('div').dataset.country); // TODO получили страну, можно использовать
+  });
+}
+
 function setTables(data) {
   table.setGlobalCases(requestForAPI.getCountriesAndCases(data));
   table.setCasesByCountry(
@@ -37,4 +44,4 @@ function update() {
 }
 
 update();
-table.lisener();
+onClickCountry();

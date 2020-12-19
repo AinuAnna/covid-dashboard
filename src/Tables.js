@@ -85,19 +85,4 @@ export default class Tables {
     }, 0);
     this.createDivGlobalDeaths(this.dataByDeaths);
   }
-
-  lisener() {
-    const elements = document.getElementById('cases-by-country');
-    elements.addEventListener('click', () => {
-      this.onClickCountry();
-    });
-  }
-
-  // TODO Передача дата сет
-  onClickCountry() {
-    const element = document.getElementsByClassName('country__table');
-    for (const i of element) {
-      console.log(i.dataset.country);
-    }
-  }
 }
