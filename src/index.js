@@ -1,41 +1,40 @@
 import RequestForAPI from './requestForAPI';
+import Tables from './Tables';
+import Charts from './chart';
 import Map from './Map';
 import './sass/style.scss';
-// import Chart from './chart';
 
-// const chart = new Chart();
+const table = new Tables();
+const chart = new Charts();
 const map = new Map();
 const requestForAPI = new RequestForAPI();
 
-function formatData(data) {
-  const timeline = Object.keys(data.timeline.cases)
-    .concat(Object.keys(data.timeline.deaths))
-    .concat(Object.keys(data.timeline.recovered));
-  const dates = timeline.filter((item, index) => timeline.indexOf(item) === index);
-  const result = Object.assign(
-    dates.map((key) => [
-      {
-        Date: new Date(key),
-        Cases: data.timeline.cases[key],
-        Deaths: data.timeline.deaths[key],
-        Recovered: data.timeline.recovered[key],
-      },
-    ])
-  );
-  return result;
+function getSortedByCasesData(data) {
+  data.sort((a, b) => {
+    return b.cases - a.cases;
+  });
+  return data;
+}
+
+function setTables(data) {
+  table.setGlobalCases(requestForAPI.getCountriesAndCases(data));
+  getSortedByCasesData(data);
+  table.setCasesByCountry(requestForAPI.getCountriesAndCases());
+  table.setGlobalDeathsCases(requestForAPI.getDeathsCases(data));
+  table.setCasesByDeaths(requestForAPI.getDeathsCases());
 }
 
 function update() {
   RequestForAPI.getSummary().then((data) => {
     requestForAPI.setData(data);
-    //console.log(data);
-    map.setData(requestForAPI.getCountriesWithLatLonAndCases());
-    // map.paintCircle();
-    map.addGeoJSON();
-    RequestForAPI.getHistorical('belarus').then((data2) => {
-      // chart.setData(FormatData(data2));
+    setTables(data);
+    map.updateData(requestForAPI.getCountriesWithLatLonAndCases());
+    RequestForAPI.getHistorical('india').then((history) => {
+      requestForAPI.setData(history);
+      chart.setData(requestForAPI.getHistoricalData());
     });
   });
 }
 
 update();
+table.lisener();

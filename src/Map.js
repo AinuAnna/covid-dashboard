@@ -99,7 +99,9 @@ export default class Map {
       const currentCountry = this.countries && props ? this.countries.filter((cur) => cur.iso3 === props.iso_a3) : 0;
 
       this.div.innerHTML =
-        currentCountry && props ? `${currentCountry[0].country} — ${currentCountry[0].cases}` : `Hover over a country`;
+        currentCountry[0] && props
+          ? `${currentCountry[0].country} — ${currentCountry[0].cases}`
+          : `Hover over a country`;
     };
     this.info.addTo(this.map);
   }
