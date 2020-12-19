@@ -11,54 +11,48 @@
     </header>
     <div class="container">
       <section class="container__left">
-        <div class="content-box global">
-          <div class="expand"></div>
-          <span class="content-box__title">Global Cases</span>
+        <div id="global-cases" class="content-box global">
+            <div class="expand"></div>
+          <span class = "content-box__title">Global Cases</span>
         </div>
-        <div class="content-box country">
-          <div class="expand"></div>
-          <span class="content-box__title">
-            Cases by Country/Region/Sovereignty
-          </span>
+        <div id="cases-by-country" class="content-box country">
+            <div class="expand"></div>
+          <span class = "content-box__title">Cases by Country/Region/Sovereignty</span>
         </div>
         <div class="content-box date">
-          <div class="expand"></div>
-          <span class="content-box__title">Last Updated at (M/D/YYYY)</span>
+            <div class="expand"></div>
+          <span class = "content-box__title">Last Updated at (M/D/YYYY)</span>
         </div>
       </section>
-      <section class="map">
+
+      <section class="map" id="map">
         <div class="content-box">
-          <div class="expand"></div>
-        </div>
-      </section>
+        <div class="expand"></div>
+        </section>
+
       <section class="container__right">
         <div class="tables">
           <div class="content-box" id="deaths">
             <div class="expand"></div>
-            <span class="content-box__title">Global Deaths</span>
+            <span class = "content-box__title">Global Deaths</span>
           </div>
           <div class="content-box" id="state">
             <div class="expand"></div>
-            <span class="content-box__title">US State Level</span>
+            <span class = "content-box__title">US State Level</span>
           </div>
         </div>
         <div class="chart">
           <div class="content-box" id="daily">
             <div class="expand"></div>
             <span class="content-box__title">Daily Cases</span>
+            <canvas id="myChart" class="chart"></canvas>
           </div>
         </div>
       </section>
     </div>
     <footer>
       <a href="https://rs.school/js/">
-        <img
-          src="./assets/logo-rsschool3.png"
-          alt="RS-Sсhool"
-          class="footer__RS-logo"
-          width="100"
-          height="50"
-        />
+        <img src="./assets/logo-rsschool3.png" alt="RS-Sсhool" class="footer__RS-logo" width="100" height="50" />
       </a>
       <div class="contacts">
         <ul>
