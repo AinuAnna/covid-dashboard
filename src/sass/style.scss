@@ -71,6 +71,14 @@ footer {
     height: 100%;
     overflow: auto;
   }
+  & .country__table,
+  .deaths__table,
+  .recovered__table {
+    cursor: pointer;
+    &:hover {
+      background-color: #00325e;
+    }
+  }
   &.date {
     height: 5rem;
     margin-top: 0.5rem;
@@ -124,6 +132,7 @@ footer {
 .content-box#state {
   width: 17em;
   margin-left: 0.25rem;
+  overflow: auto;
   &.expanded {
     width: 100%;
     height: calc(100vh - 165px);
@@ -131,6 +140,16 @@ footer {
     left: 0;
     margin: 0;
   }
+  :first-child {
+    text-align: center;
+  }
+}
+.dlobal-recovered {
+  text-align: center;
+}
+.recovered__table {
+  display: flex;
+  justify-content: space-between;
 }
 .content-box#daily {
   margin-top: 0.5rem;

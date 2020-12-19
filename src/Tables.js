@@ -2,6 +2,7 @@ export default class Tables {
   constructor() {
     this.dataByCases = [];
     this.dataByDeaths = [];
+    this.dataByRecovered = [];
     this.cases = null;
     this.item = 0;
   }
@@ -30,7 +31,7 @@ export default class Tables {
       const createDivCases = document.createElement('div');
       createDivCases.className = 'country__table';
       createDivCases.setAttribute('data-country', this.dataByCases[i].country);
-      createDivCases.innerHTML = `<span>${this.dataByCases[i].cases}</span><span>${this.dataByCases[i].country}</span>`;
+      createDivCases.innerHTML = `<span>${this.dataByCases[i].cases}</span><span>${this.dataByCases[i].country}  <img src="${this.dataByCases[i].countryInfo}" alt="${this.dataByCases[i].country}" width="25" height="15" /></span>`;
       TABLE.appendChild(createDivCases);
     }
   }
@@ -41,6 +42,7 @@ export default class Tables {
       return {
         cases: item.cases,
         country: item.country,
+        countryInfo: item.countryInfo,
       };
     });
     this.createDivCases();
@@ -51,6 +53,7 @@ export default class Tables {
     for (let i = 0; i < this.dataByDeaths.length; i += 1) {
       const createDivDeaths = document.createElement('div');
       createDivDeaths.className = 'deaths__table';
+      createDivDeaths.setAttribute('data-country', this.dataByCases[i].country);
       createDivDeaths.innerHTML = `<span>${this.dataByDeaths[i].deaths}</span><span>${this.dataByDeaths[i].country}</span>`;
       TABLE.appendChild(createDivDeaths);
     }
@@ -84,5 +87,46 @@ export default class Tables {
       return acc + item.deaths;
     }, 0);
     this.createDivGlobalDeaths(this.dataByDeaths);
+  }
+
+  createDivRecovered() {
+    const TABLE = document.getElementById('recovered');
+    for (let i = 0; i < this.dataByRecovered.length; i += 1) {
+      const createDivRecovered = document.createElement('div');
+      createDivRecovered.className = 'recovered__table';
+      createDivRecovered.setAttribute('data-country', this.dataByCases[i].country);
+      createDivRecovered.innerHTML = `<span>${this.dataByRecovered[i].recovered}</span><span>${this.dataByRecovered[i].country}</span>`;
+      TABLE.appendChild(createDivRecovered);
+    }
+  }
+
+  setCasesByRecovered(cases) {
+    this.cases = cases;
+    this.dataByRecovered = cases.map((item) => {
+      return {
+        recovered: item.recovered,
+        country: item.country,
+      };
+    });
+    this.createDivRecovered();
+  }
+
+  createDivGlobalRecovered(element) {
+    const TABLE = document.getElementById('recovered');
+    const createDivRecovered = document.createElement('div');
+    createDivRecovered.className = 'dlobal-recovered';
+    createDivRecovered.innerHTML = `<span>${element}</span>`;
+    TABLE.appendChild(createDivRecovered);
+  }
+
+  setGlobalRecoveredCases(recovered) {
+    this.recovered = recovered;
+    this.dataByRecovered = recovered.reduce((acc, item) => {
+      if (item.recovered === null && undefined) {
+        item.recovered = this.item;
+      }
+      return acc + item.recovered;
+    }, 0);
+    this.createDivGlobalRecovered(this.dataByRecovered);
   }
 }

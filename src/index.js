@@ -32,6 +32,10 @@ function setTables(data) {
   const deaths = requestForAPI.getDeathsCases();
   table.setGlobalDeathsCases(deaths);
   table.setCasesByDeaths(deaths);
+
+  const recovered = requestForAPI.getRecoveredCases();
+  table.setGlobalRecoveredCases(recovered);
+  table.setCasesByRecovered(recovered);
 }
 
 function update() {
