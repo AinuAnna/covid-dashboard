@@ -1,9 +1,9 @@
 import RequestForAPI from './requestForAPI';
-import Table from './table';
+import Tables from './Tables';
 import Charts from './chart';
 import './sass/style.scss';
 
-const table = new Table();
+const table = new Tables();
 const chart = new Charts();
 const requestForAPI = new RequestForAPI();
 
@@ -14,17 +14,21 @@ function getSortedByCasesData(data) {
   return data;
 }
 
+function setTables(data) {
+  table.setGlobalCases(requestForAPI.getCountriesAndCases(data));
+  table.setCasesByCountry(
+    requestForAPI.getCountriesAndCases(getSortedByCasesData(data))
+  );
+  table.setGlobalDeathsCases(requestForAPI.getDeathsCases(data));
+  table.setCasesByDeaths(
+    requestForAPI.getDeathsCases(getSortedByCasesData(data))
+  );
+}
+
 function update() {
   RequestForAPI.getSummary().then((data) => {
     requestForAPI.setData(data);
-    table.setGlobalCases(requestForAPI.getCountriesAndCases());
-    table.setCasesByCountry(
-      requestForAPI.getCountriesAndCases(getSortedByCasesData(data))
-    );
-    table.setGlobalDeathsCases(requestForAPI.getDeathsCases());
-    table.setCasesByDeaths(
-      requestForAPI.getDeathsCases(getSortedByCasesData(data))
-    );
+    setTables(data);
     RequestForAPI.getHistorical('india').then((history) => {
       requestForAPI.setData(history);
       chart.setData(requestForAPI.getHistoricalData());
@@ -33,4 +37,4 @@ function update() {
 }
 
 update();
-table.onClickCountry();
+table.lisener();

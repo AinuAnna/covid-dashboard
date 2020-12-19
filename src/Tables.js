@@ -3,6 +3,7 @@ export default class Tables {
     this.dataByCases = [];
     this.dataByDeaths = [];
     this.cases = null;
+    this.item = 0;
   }
 
   createDivGlobal(element) {
@@ -15,17 +16,20 @@ export default class Tables {
   setGlobalCases(cases) {
     this.cases = cases;
     this.dataGlobalCases = cases.reduce((acc, item) => {
+      if (item.cases === null && undefined) {
+        item.cases = this.item;
+      }
       return acc + item.cases;
     }, 0);
     this.createDivGlobal(this.dataGlobalCases);
   }
 
   createDivCases() {
+    const TABLE = document.getElementById('cases-by-country');
     for (let i = 0; i < this.dataByCases.length; i += 1) {
-      const TABLE = document.getElementById('cases-by-country');
       const createDivCases = document.createElement('div');
       createDivCases.className = 'country__table';
-      createDivCases.setAttribute('data-cases', this.dataByCases[i].cases);
+      createDivCases.setAttribute('data-country', this.dataByCases[i].country);
       createDivCases.innerHTML = `<span>${this.dataByCases[i].cases}</span><span>${this.dataByCases[i].country}</span>`;
       TABLE.appendChild(createDivCases);
     }
@@ -43,8 +47,8 @@ export default class Tables {
   }
 
   createDivDeaths() {
+    const TABLE = document.getElementById('deaths');
     for (let i = 0; i < this.dataByDeaths.length; i += 1) {
-      const TABLE = document.getElementById('deaths');
       const createDivDeaths = document.createElement('div');
       createDivDeaths.className = 'deaths__table';
       createDivDeaths.innerHTML = `<span>${this.dataByDeaths[i].deaths}</span><span>${this.dataByDeaths[i].country}</span>`;
@@ -74,19 +78,26 @@ export default class Tables {
   setGlobalDeathsCases(deaths) {
     this.deaths = deaths;
     this.dataByDeaths = deaths.reduce((acc, item) => {
+      if (item.deaths === null && undefined) {
+        item.deaths = this.item;
+      }
       return acc + item.deaths;
     }, 0);
     this.createDivGlobalDeaths(this.dataByDeaths);
   }
 
+  lisener() {
+    const elements = document.getElementById('cases-by-country');
+    elements.addEventListener('click', () => {
+      this.onClickCountry();
+    });
+  }
+
   // TODO Передача дата сет
   onClickCountry() {
-    const elements = document.getElementById('cases-by-country');
     const element = document.getElementsByClassName('country__table');
-
-    elements.addEventListener('click', () => {
-      console.log(element);
-      // this.createDivGlobal(element.dataset.cases);
-    });
+    for (const i of element) {
+      console.log(i.dataset.country);
+    }
   }
 }
