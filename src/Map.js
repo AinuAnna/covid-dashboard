@@ -57,7 +57,12 @@ export default class Map {
   }
 
   updateMap() {
-    this.geojson = L.geoJSON(geo, { style: this.addStyle, onEachFeature: this.onEachFeature }).addTo(this.map);
+    if (this.layerGroup !== undefined) this.layerGroup.removeLayer(this.geojson);
+
+    this.geojson = L.geoJSON(geo, { style: this.addStyle, onEachFeature: this.onEachFeature });
+    this.layerGroup = new L.LayerGroup();
+    this.layerGroup.addTo(this.map);
+    this.layerGroup.addLayer(this.geojson);
   }
 
   getCasesOfCountry(country) {

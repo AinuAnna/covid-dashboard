@@ -2,12 +2,15 @@ import RequestForAPI from './requestForAPI';
 import Tables from './Tables';
 import Charts from './chart';
 import Map from './Map';
+import Toggles from './toggles';
 import './sass/style.scss';
 
 const table = new Tables();
 const chart = new Charts();
 const map = new Map();
 const requestForAPI = new RequestForAPI();
+
+Toggles.createToggles();
 
 function getSortedByCasesData(data) {
   data.sort((a, b) => b.cases - a.cases);
@@ -34,16 +37,21 @@ function setTables(data) {
   table.setCasesByDeaths(deaths);
 }
 
-function update() {
+function startApp() {
   RequestForAPI.getSummary().then((data) => {
     requestForAPI.setData(data);
     setTables(data);
     map.updateData(requestForAPI.getCountriesWithLatLonAndCases());
     RequestForAPI.getHistorical('india').then((history) => {
-      requestForAPI.setData(history);
-      chart.setData(requestForAPI.getHistoricalData());
+      // requestForAPI.setData(history);
+      // chart.setData(requestForAPI.getHistoricalData());
     });
   });
+}
+
+function update() {
+  setTables(requestForAPI.data);
+  map.updateData(requestForAPI.getCountriesWithLatLonAndCases());
 }
 
 function setupResizeButtons() {
@@ -55,7 +63,77 @@ function setupResizeButtons() {
     })
   );
 }
-update();
 
+function updateFieldsIndicators(fields, direction) {
+  const currentIndicator = requestForAPI.getNewIndicator(direction);
+  fields.forEach((field) => {
+    const f = field;
+    f.innerHTML = currentIndicator;
+  });
+}
+
+function switchButton(btnActive, btnInactive) {
+  btnActive.forEach((btn) => {
+    btn.classList.add('toggle-active');
+  });
+  btnInactive.forEach((btn) => {
+    btn.classList.remove('toggle-active');
+  });
+}
+
+function setToggles() {
+  const ArrayOfButtons = Toggles.getAllButtonsOfToggles();
+  const fieldsIndicators = Toggles.getAllFieldsIndicators();
+  const btnsBack = ArrayOfButtons[0];
+  const btnsForth = ArrayOfButtons[1];
+  const btnsTotal = ArrayOfButtons[2];
+  const btnsToday = ArrayOfButtons[3];
+  const btnsAbsolute = ArrayOfButtons[4];
+  const btnsPer100k = ArrayOfButtons[5];
+  btnsBack.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      updateFieldsIndicators(fieldsIndicators, -1);
+      update();
+    });
+  });
+  btnsForth.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      updateFieldsIndicators(fieldsIndicators, 1);
+      update();
+    });
+  });
+  btnsTotal.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      requestForAPI.isGlobal = true;
+      update();
+      switchButton(btnsTotal, btnsToday);
+    });
+  });
+  btnsToday.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      requestForAPI.isGlobal = false;
+      update();
+      switchButton(btnsToday, btnsTotal);
+    });
+  });
+  btnsAbsolute.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      requestForAPI.isAbsoluteValue = true;
+      update();
+      switchButton(btnsAbsolute, btnsPer100k);
+    });
+  });
+  btnsPer100k.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      requestForAPI.isAbsoluteValue = false;
+      update();
+      switchButton(btnsPer100k, btnsAbsolute);
+    });
+  });
+}
+
+startApp();
 setupResizeButtons();
 onClickCountry();
+
+setToggles();
