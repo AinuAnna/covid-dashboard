@@ -70,6 +70,14 @@ export default class RequestForAPI {
     });
   }
 
+  getLastDate() {
+    return this.data.map((el) => {
+      return {
+        updated: el.updated,
+      };
+    });
+  }
+
   getHistoricalData() {
     const dataTimeline = this.data.timeline;
     const merged = [

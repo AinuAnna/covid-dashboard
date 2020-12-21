@@ -5,6 +5,7 @@ export default class Tables {
     this.dataByRecovered = [];
     this.cases = null;
     this.item = 0;
+    this.lastDate = 0;
   }
 
   createDivGlobal(element) {
@@ -128,5 +129,22 @@ export default class Tables {
       return acc + item.recovered;
     }, 0);
     this.createDivGlobalRecovered(this.dataByRecovered);
+  }
+
+  createDivDate(element) {
+    const TABLE = document.getElementById('last-date');
+    // const createDivDate = document.createElement('div');
+    TABLE.innerHTML = `<span>${Date(element)}</span>`;
+    TABLE.appendChild(createDivDate);
+  }
+
+  setLastDate(updated) {
+    this.updated = updated;
+    this.lastDate = updated.map((item) => {
+      return {
+        updated: item.updated,
+      };
+    });
+    this.createDivDate();
   }
 }

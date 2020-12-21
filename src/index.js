@@ -36,6 +36,9 @@ function setTables(data) {
   const recovered = requestForAPI.getRecoveredCases();
   table.setGlobalRecoveredCases(recovered);
   table.setCasesByRecovered(recovered);
+
+  const updated = requestForAPI.getLastDate();
+  table.setLastDate(updated);
 }
 
 function update() {
