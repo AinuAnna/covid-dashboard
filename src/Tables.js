@@ -11,6 +11,7 @@ export default class Tables {
   createDivGlobal(element) {
     const TABLE = document.getElementById('global-cases');
     const createDivGlobal = document.createElement('div');
+    createDivGlobal.className = 'dlobal-cases';
     createDivGlobal.innerHTML = `<span>${element}</span>`;
     TABLE.appendChild(createDivGlobal);
   }
@@ -133,8 +134,8 @@ export default class Tables {
 
   createDivDate(element) {
     const TABLE = document.getElementById('last-date');
-    // const createDivDate = document.createElement('div');
-    TABLE.innerHTML = `<span>${Date(element)}</span>`;
+    const createDivDate = document.createElement('div');
+    createDivDate.innerHTML = `${Date(element)}`;
     TABLE.appendChild(createDivDate);
   }
 

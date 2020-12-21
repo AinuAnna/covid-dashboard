@@ -24,11 +24,19 @@ export default class RequestForAPI {
   }
 
   static async getTotal() {
-    return RequestForAPI.loadData(URLS.Total());
+    return RequestForAPI.loadData(URLS.Total);
   }
 
   setData(data) {
     this.data = data;
+  }
+
+  setTotalData(total) {
+    this.total = total;
+  }
+
+  setHistoryData(history) {
+    this.history = history;
   }
 
   getCountriesWithLatLonAndCases() {
@@ -78,21 +86,35 @@ export default class RequestForAPI {
     });
   }
 
+  getGlobalCases() {
+    const merged = [
+      ...new Set(Object.keys(this.total.cases), Object.keys(this.total.deaths), Object.keys(this.total.recovered)),
+    ];
+    return merged.map((el) => {
+      return {
+        date: new Date(el),
+        cases: this.total.cases[el],
+        deaths: this.total.deaths[el],
+        recovered: this.total.recovered[el],
+      };
+    });
+  }
+
   getHistoricalData() {
-    const dataTimeline = this.data.timeline;
+    const historyTimeline = this.history.timeline;
     const merged = [
       ...new Set(
-        Object.keys(dataTimeline.cases),
-        Object.keys(dataTimeline.deaths),
-        Object.keys(dataTimeline.recovered)
+        Object.keys(historyTimeline.cases),
+        Object.keys(historyTimeline.deaths),
+        Object.keys(historyTimeline.recovered)
       ),
     ];
     return merged.map((el) => {
       return {
         date: new Date(el),
-        cases: dataTimeline.cases[el],
-        deaths: dataTimeline.deaths[el],
-        recovered: dataTimeline.recovered[el],
+        cases: historyTimeline.cases[el],
+        deaths: historyTimeline.deaths[el],
+        recovered: historyTimeline.recovered[el],
       };
     });
   }

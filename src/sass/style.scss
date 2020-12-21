@@ -3,6 +3,13 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+@mixin button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  color: #fff;
+}
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin: 0;
@@ -13,7 +20,8 @@ body {
 }
 
 h1 {
-  font-size: 18px;
+  color: #ffffff;
+  font-size: 20px;
   text-align: center;
 }
 
@@ -28,15 +36,15 @@ section {
 header,
 footer {
   height: 50px;
-  background: #222;
-  border: 1px solid #ded;
+  background: #2a2f43;
+  border: 1px solid #616ed4;
 }
 
 .container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: calc(100vh - 166px);
+  height: calc(100vh - 120px);
   margin: 0.5rem 0;
 }
 .container > section {
@@ -52,16 +60,17 @@ footer {
 }
 .container .map {
   flex: 1;
+  min-width: 500px;
   margin: 0 0.5rem;
-  background: #222;
+  background: #2a2f43;
   flex-grow: 3;
 }
 .content-box {
   width: 100%;
   height: 100%;
   padding: 0 0.5rem;
-  background: #222;
-  border: 1px solid #ded;
+  background: #2a2f43;
+  border: 1px solid #616ed4;
   &.global {
     height: 10rem;
     margin-bottom: 0.5rem;
@@ -70,18 +79,22 @@ footer {
   &.country {
     height: 100%;
     overflow: auto;
+    text-align: center;
   }
   & .country__table,
   .deaths__table,
   .recovered__table {
     cursor: pointer;
+    border-bottom: 1px solid #616ed459;
+    padding: 5px 0 5px 7px;
     &:hover {
-      background-color: #00325e;
+      background-color: #f9b54fcb;
     }
   }
   &.date {
     height: 5rem;
     margin-top: 0.5rem;
+    text-align: center;
   }
   &.expanded .expand {
     background: url(../assets/collapse.svg) center center no-repeat;
@@ -98,7 +111,7 @@ footer {
     position: absolute;
     display: block;
     width: 100%;
-    height: calc(100vh - 165px);
+    height: calc(100vh - 119px);
     top: 58px;
     bottom: 0;
     right: 0;
@@ -115,6 +128,7 @@ footer {
   width: 17.2em;
   margin-right: 0.5rem;
   overflow: auto;
+  text-align: center;
   &.expanded {
     width: 100%;
   }
@@ -122,42 +136,48 @@ footer {
     text-align: center;
   }
 }
-.dlobal-death {
-  text-align: center;
+.content-box#map {
+  &.expanded {
+    width: 100%;
+    height: calc(100vh - 119px);
+    top: 58px;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+  }
 }
-.deaths__table {
+.dlobal-death,
+.dlobal-recovered,
+.dlobal-cases {
+  font-size: 2em;
+  color: #f9b64f;
+}
+.deaths__table,
+.recovered__table {
   display: flex;
   justify-content: space-between;
 }
-.content-box#state {
+.content-box#recovered {
   width: 17em;
   margin-left: 0.25rem;
   overflow: auto;
+  text-align: center;
   &.expanded {
     width: 100%;
-    height: calc(100vh - 165px);
+    height: calc(100vh - 119px);
     top: 58px;
     left: 0;
     margin: 0;
   }
-  :first-child {
-    text-align: center;
-  }
-}
-.dlobal-recovered {
-  text-align: center;
-}
-.recovered__table {
-  display: flex;
-  justify-content: space-between;
 }
 .content-box#daily {
   margin-top: 0.5rem;
   width: 35em;
   overflow: hidden;
+  text-align: center;
   &.expanded {
     width: 100%;
-    height: calc(100vh - 165px);
+    height: calc(100vh - 119px);
     top: 58px;
     bottom: 0;
     left: 0;
@@ -179,31 +199,50 @@ footer {
   }
 }
 .content-box__title {
-  margin-left: 20px;
+  margin-left: 30px;
+  color: #109e92;
+  font-size: 20px;
+  font-weight: bold;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+}
+.text {
+  padding-bottom: 30px;
 }
 /* CHART */
 .chart {
   max-width: 100%;
-  max-height: 100%;
+  max-height: 706px;
 }
 /* FOOTER */
 footer {
-  height: 100%;
   padding: 5px;
   display: flex;
+  justify-content: space-between;
+  ul {
+    margin: 0;
+    padding: 4px;
+  }
+  li {
+    display: inline;
+    margin-right: 5px;
+    padding: 3px;
+  }
+
   a {
     text-decoration: none;
     color: #fff;
 
     &:hover {
-      color: coral;
+      color: #f9b64f;
     }
   }
 }
 .footer__RS-logo {
-  margin: 1rem 0;
-  width: 8rem;
-  margin-right: 100px;
+  width: 5rem;
+  height: 2rem;
+  padding: 2px;
 }
 .footer__RS-logo:hover {
   opacity: 0.8;

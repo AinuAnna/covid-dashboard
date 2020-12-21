@@ -13,20 +13,20 @@
       <section class="container__left">
         <div id="global-cases" class="content-box global">
             <div class="expand"></div>
-          <span class = "content-box__title">Global Cases</span>
+            <div class = "text"> <span class = "content-box__title">Global Cases</span></div>
         </div>
         <div id="cases-by-country" class="content-box country">
             <div class="expand"></div>
-          <span class = "content-box__title">Cases by Country/Region/Sovereignty</span>
+            <div class = "text"><span class = "content-box__title">Cases by Country</span></div>
         </div>
         <div class="content-box date">
             <div class="expand"></div>
-          <span id="last-date" class = "content-box__title">Last Updated at (M/D/YYYY)</span>
+          <div id="last-date" class = "text"><div class = "content-box__title">Last Updated at (M/D/YYYY)</div></div>
         </div>
       </section>
 
-      <section class="map" id="map">
-        <div class="content-box">
+      <section class="map">
+        <div class="content-box" id="map">
         <div class="expand"></div>
         </section>
 
@@ -34,18 +34,20 @@
         <div class="tables">
           <div class="content-box" id="deaths">
             <div class="expand"></div>
-            <span class = "content-box__title">Global Deaths</span>
+           <div class = "text"><span class = "content-box__title">Global Deaths</span></div>
           </div>
-          <div class="content-box" id="state">
+          <div class="content-box" id="recovered">
             <div class="expand"></div>
-            <span class = "content-box__title" id="recovered">Global Recovered</span>
+            <div class = "text"> <span class = "content-box__title" >Global Recovered</span></div>
           </div>
         </div>
         <div class="chart">
           <div class="content-box" id="daily">
             <div class="expand"></div>
-            <span class="content-box__title">Daily Cases</span>
+            <div class="redraw">
+            <div class = "text"><span class="content-box__title">Daily Cases</span></div>
             <canvas id="myChart" class="chart"></canvas>
+            </div>
           </div>
         </div>
       </section>
