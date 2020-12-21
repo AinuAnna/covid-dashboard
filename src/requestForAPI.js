@@ -84,6 +84,14 @@ export default class RequestForAPI {
     });
   }
 
+  getLastDate() {
+    return this.data.map((el) => {
+      return {
+        updated: el.updated,
+      };
+    });
+  }
+
   getGlobalCases() {
     const merged = [
       ...new Set(Object.keys(this.total.cases), Object.keys(this.total.deaths), Object.keys(this.total.recovered)),

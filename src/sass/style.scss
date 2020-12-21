@@ -93,6 +93,9 @@ footer {
       background-color: #f9b54fcb;
     }
   }
+  & .country__table.hide {
+    display: none;
+  }
   &.date {
     height: 5rem;
     margin-top: 0.5rem;

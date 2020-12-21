@@ -3,6 +3,7 @@ import Tables from './Tables';
 import Charts from './chart';
 import Map from './Map';
 import Toggles from './toggles';
+import search from './search';
 import './sass/style.scss';
 
 const table = new Tables();
@@ -46,6 +47,9 @@ function setTables(data) {
   const recovered = requestForAPI.getRecoveredCases();
   table.setGlobalRecoveredCases(recovered);
   table.setCasesByRecovered(recovered);
+
+  const updated = requestForAPI.getLastDate();
+  table.setLastDate(updated);
 }
 
 function startApp() {
@@ -82,7 +86,6 @@ function onClickCountry() {
     updateCharts(selectedCountry);
   });
 }
-startApp();
 
 function updateFieldsIndicators(fields, direction) {
   const currentIndicator = requestForAPI.getNewIndicator(direction);

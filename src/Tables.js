@@ -1,3 +1,5 @@
+const moment = require('moment');
+// require
 export default class Tables {
   constructor() {
     this.dataByCases = [];
@@ -5,6 +7,7 @@ export default class Tables {
     this.dataByRecovered = [];
     this.cases = null;
     this.item = 0;
+    this.lastDate = 0;
   }
 
   createDivGlobal(element) {
@@ -129,5 +132,20 @@ export default class Tables {
       return acc + item.recovered;
     }, 0);
     this.createDivGlobalRecovered(this.dataByRecovered);
+  }
+
+  createDivDate(element) {
+    const TABLE = document.getElementById('last-date');
+    TABLE.innerHTML = `${moment(element).format('MMM Do YY')}`;
+  }
+
+  setLastDate(updated) {
+    this.updated = updated;
+    this.lastDate = updated.map((item) => {
+      return {
+        updated: item.updated,
+      };
+    });
+    this.createDivDate();
   }
 }
