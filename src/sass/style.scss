@@ -3,6 +3,13 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+@mixin button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  color: #fff;
+}
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin: 0;
@@ -13,7 +20,8 @@ body {
 }
 
 h1 {
-  font-size: 18px;
+  color: #ffffff;
+  font-size: 20px;
   text-align: center;
 }
 
@@ -28,8 +36,8 @@ section {
 header,
 footer {
   height: 50px;
-  background: #222;
-  border: 1px solid #ded;
+  background: #2a2f43;
+  border: 1px solid #616ed4;
 }
 
 .container {
@@ -53,15 +61,15 @@ footer {
 .container .map {
   flex: 1;
   margin: 0 0.5rem;
-  background: #222;
+  background: #2a2f43;
   flex-grow: 3;
 }
 .content-box {
   width: 100%;
   height: 100%;
   padding: 0 0.5rem;
-  background: #222;
-  border: 1px solid #ded;
+  background: #2a2f43;
+  border: 1px solid #616ed4;
   &.global {
     height: 10rem;
     margin-bottom: 0.5rem;
@@ -71,6 +79,14 @@ footer {
     height: 100%;
     overflow: auto;
     text-align: center;
+  }
+  & .country__table,
+  .deaths__table,
+  .recovered__table {
+    cursor: pointer;
+    &:hover {
+      background-color: #f9b54fcb;
+    }
   }
   &.date {
     height: 5rem;
@@ -141,7 +157,7 @@ footer {
   display: flex;
   justify-content: space-between;
 }
-.content-box#state {
+.content-box#recovered {
   width: 17em;
   margin-left: 0.25rem;
   overflow: auto;
@@ -184,7 +200,10 @@ footer {
 }
 .content-box__title {
   margin-left: 20px;
-  margin-bottom: 8px;
+  color: #7cb342;
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;
 }
 /* CHART */
 .chart {
@@ -201,7 +220,7 @@ footer {
     color: #fff;
 
     &:hover {
-      color: coral;
+      color: #f9b64f;
     }
   }
 }
