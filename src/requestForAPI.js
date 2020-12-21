@@ -89,55 +89,41 @@ export default class RequestForAPI {
     return this.isGlobal ? this.getGlobalData(currentCountry) : this.getTodayData(currentCountry);
   }
 
+  static getCoef100kPopulation(currentCountry) {
+    return currentCountry.population / 100000;
+  }
+
   getGlobalData(currentCountry) {
+    const coefficient = RequestForAPI.getCoef100kPopulation(currentCountry);
     switch (this.currentIndicator) {
       case 'cases':
-        return this.isAbsoluteValue
-          ? currentCountry.cases
-          : Math.round(currentCountry.population / currentCountry.cases);
+        return this.isAbsoluteValue ? currentCountry.cases : (currentCountry.cases / coefficient).toFixed(2);
       case 'death':
-        return this.isAbsoluteValue
-          ? currentCountry.deaths
-          : Math.round(currentCountry.population / currentCountry.deaths);
+        return this.isAbsoluteValue ? currentCountry.deaths : (currentCountry.deaths / coefficient).toFixed(2);
       case 'recovered':
-        return this.isAbsoluteValue
-          ? currentCountry.recovered
-          : Math.round(currentCountry.population / currentCountry.recovered);
+        return this.isAbsoluteValue ? currentCountry.recovered : (currentCountry.recovered / coefficient).toFixed(2);
       default:
         return false;
     }
   }
 
   getTodayData(currentCountry) {
+    const coefficient = RequestForAPI.getCoef100kPopulation(currentCountry);
     switch (this.currentIndicator) {
       case 'cases':
-        return this.isAbsoluteValue
-          ? currentCountry.todayCases
-          : Math.round(currentCountry.population / currentCountry.todayCases);
+        return this.isAbsoluteValue ? currentCountry.todayCases : (currentCountry.todayCases / coefficient).toFixed(4);
       case 'death':
         return this.isAbsoluteValue
           ? currentCountry.todayDeaths
-          : Math.round(currentCountry.population / currentCountry.todayDeaths);
+          : (currentCountry.todayDeaths / coefficient).toFixed(4);
       case 'recovered':
         return this.isAbsoluteValue
           ? currentCountry.todayRecovered
-          : Math.round(currentCountry.population / currentCountry.todayRecovered);
+          : (currentCountry.todayRecovered / coefficient).toFixed(4);
       default:
         return false;
     }
   }
-
-  getCases(currentCountry) {
-    return this.isGlobal ? currentCountry.cases : currentCountry.todayCases;
-  }
-
-  getDeaths(currentCountry) {
-    return this.isGlobal ? currentCountry.deaths : currentCountry.todayDeath;
-  }
-  /*
-  getCountry() {
-
-  } */
 
   getNewIndicator(direction) {
     const currentIndex =
