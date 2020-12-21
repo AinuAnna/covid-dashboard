@@ -10,6 +10,7 @@ export default class Tables {
   createDivGlobal(element) {
     const TABLE = document.getElementById('global-cases');
     const createDivGlobal = document.createElement('div');
+    createDivGlobal.className = 'dlobal-cases';
     createDivGlobal.innerHTML = `<span>${element}</span>`;
     TABLE.appendChild(createDivGlobal);
   }

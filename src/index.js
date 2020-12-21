@@ -16,11 +16,18 @@ function getSortedByCasesData(data) {
   data.sort((a, b) => b.cases - a.cases);
 }
 
-function onClickCountry() {
-  const elements = document.getElementById('cases-by-country');
-  elements.addEventListener('click', (event) => {
-    console.log(event.target.closest('div').dataset.country); // TODO получили страну, можно использовать
-  });
+function updateCharts(selectedCountry) {
+  if (selectedCountry) {
+    RequestForAPI.getHistorical(selectedCountry).then((history) => {
+      requestForAPI.setHistoryData(history);
+      chart.setData(requestForAPI.getHistoricalData());
+    });
+  } else {
+    RequestForAPI.getTotal().then((total) => {
+      requestForAPI.setTotalData(total);
+      chart.setData(requestForAPI.getGlobalCases());
+    });
+  }
 }
 
 function setTables(data) {
@@ -46,6 +53,7 @@ function startApp() {
     requestForAPI.setData(data);
     setTables(data);
     map.updateData(requestForAPI.getCountriesWithLatLonAndCases());
+    updateCharts();
     RequestForAPI.getHistorical('india').then((history) => {
       // requestForAPI.setData(history);
       // chart.setData(requestForAPI.getHistoricalData());
@@ -67,6 +75,14 @@ function setupResizeButtons() {
     })
   );
 }
+function onClickCountry() {
+  const elements = document.getElementById('cases-by-country');
+  elements.addEventListener('click', (event) => {
+    const selectedCountry = event.target.closest('div').dataset.country;
+    updateCharts(selectedCountry);
+  });
+}
+startApp();
 
 function updateFieldsIndicators(fields, direction) {
   const currentIndicator = requestForAPI.getNewIndicator(direction);
