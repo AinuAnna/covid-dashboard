@@ -16,6 +16,13 @@ export default class Map {
     this.countries = null;
     this.createInfoBlock();
     this.createLegend();
+    this.grade = {
+      First: 10000000,
+      Second: 1000000,
+      Third: 100000,
+      Fourth: 10000,
+      Fifth: 1000,
+    };
 
     this.addStyle = (feature) => {
       return {
@@ -49,6 +56,10 @@ export default class Map {
     };
   }
 
+  setGrade() {
+    console.log(this.countries);
+  }
+
   createMap() {
     this.map = L.map('map').setView([51.505, -0.09], 2);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -57,6 +68,7 @@ export default class Map {
   }
 
   updateMap() {
+    this.setGrade();
     if (this.layerGroup !== undefined) this.layerGroup.removeLayer(this.geojson);
 
     this.geojson = L.geoJSON(geo, { style: this.addStyle, onEachFeature: this.onEachFeature });

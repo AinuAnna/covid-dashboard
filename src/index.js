@@ -34,7 +34,7 @@ function setTables(data) {
   const global = requestForAPI.getCountriesAndCases();
   table.setGlobalCases(global);
 
-  getSortedByCasesData(data);
+  // getSortedByCasesData(data);
 
   const sortedGlobal = requestForAPI.getCountriesAndCases();
   table.setCasesByCountry(sortedGlobal);
@@ -51,6 +51,7 @@ function setTables(data) {
 function startApp() {
   RequestForAPI.getSummary().then((data) => {
     requestForAPI.setData(data);
+    requestForAPI.sortData();
     setTables(data);
     map.updateData(requestForAPI.getCountriesWithLatLonAndCases());
     updateCharts();
@@ -62,7 +63,8 @@ function startApp() {
 }
 
 function update() {
-  // setTables(requestForAPI.data);
+  requestForAPI.sortData();
+  setTables(requestForAPI.data);
   map.updateData(requestForAPI.getCountriesWithLatLonAndCases());
 }
 
@@ -82,7 +84,6 @@ function onClickCountry() {
     updateCharts(selectedCountry);
   });
 }
-startApp();
 
 function updateFieldsIndicators(fields, direction) {
   const currentIndicator = requestForAPI.getNewIndicator(direction);
