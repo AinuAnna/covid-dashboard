@@ -44,7 +44,7 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: calc(100vh - 166px);
+  height: calc(100vh - 120px);
   margin: 0.5rem 0;
 }
 .container > section {
@@ -60,6 +60,7 @@ footer {
 }
 .container .map {
   flex: 1;
+  min-width: 500px;
   margin: 0 0.5rem;
   background: #2a2f43;
   flex-grow: 3;
@@ -110,7 +111,7 @@ footer {
     position: absolute;
     display: block;
     width: 100%;
-    height: calc(100vh - 165px);
+    height: calc(100vh - 119px);
     top: 58px;
     bottom: 0;
     right: 0;
@@ -216,9 +217,19 @@ footer {
 }
 /* FOOTER */
 footer {
-  height: 100%;
   padding: 5px;
   display: flex;
+  justify-content: space-between;
+  ul {
+    margin: 0;
+    padding: 4px;
+  }
+  li {
+    display: inline;
+    margin-right: 5px;
+    padding: 3px;
+  }
+
   a {
     text-decoration: none;
     color: #fff;
@@ -229,9 +240,9 @@ footer {
   }
 }
 .footer__RS-logo {
-  margin: 1rem 0;
-  width: 8rem;
-  margin-right: 100px;
+  width: 5rem;
+  height: 2rem;
+  padding: 2px;
 }
 .footer__RS-logo:hover {
   opacity: 0.8;
