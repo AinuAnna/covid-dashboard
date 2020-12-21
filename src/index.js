@@ -67,7 +67,6 @@ function onClickCountry() {
   elements.addEventListener('click', (event) => {
     const selectedCountry = event.target.closest('div').dataset.country;
     updateCharts(selectedCountry);
-    chart.redraw();
   });
 }
 startApp();
