@@ -1,3 +1,5 @@
+const moment = require('moment');
+// require
 export default class Tables {
   constructor() {
     this.dataByCases = [];
@@ -134,9 +136,7 @@ export default class Tables {
 
   createDivDate(element) {
     const TABLE = document.getElementById('last-date');
-    const createDivDate = document.createElement('div');
-    createDivDate.innerHTML = `${Date(element)}`;
-    TABLE.appendChild(createDivDate);
+    TABLE.innerHTML = `${moment(element).format('MMM Do YY')}`;
   }
 
   setLastDate(updated) {

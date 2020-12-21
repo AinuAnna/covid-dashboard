@@ -9,6 +9,12 @@ const URLS = {
 export default class RequestForAPI {
   constructor() {
     this.data = null;
+    this.isGlobal = true;
+    this.isAbsoluteValue = true;
+
+    this.CurrentIndexOfIndicators = 0;
+    this.indicators = ['cases', 'death', 'recovered'];
+    this.currentIndicator = this.indicators[this.CurrentIndexOfIndicators];
   }
 
   static loadData(target) {
@@ -45,7 +51,7 @@ export default class RequestForAPI {
         country: el.country,
         iso3: el.countryInfo.iso3,
         latLon: [el.countryInfo.lat, el.countryInfo.long],
-        cases: el.cases,
+        cases: this.getDataDependOnToggles(el),
       };
     });
   }
@@ -53,7 +59,7 @@ export default class RequestForAPI {
   getCountriesAndCases() {
     return this.data.map((el) => {
       return {
-        cases: el.cases,
+        cases: this.getDataDependOnToggles(el),
         country: el.country,
         countryInfo: [el.countryInfo.flag],
       };
@@ -117,5 +123,55 @@ export default class RequestForAPI {
         recovered: historyTimeline.recovered[el],
       };
     });
+  }
+
+  getDataDependOnToggles(currentCountry) {
+    return this.isGlobal ? this.getGlobalData(currentCountry) : this.getTodayData(currentCountry);
+  }
+
+  static getCoef100kPopulation(currentCountry) {
+    return currentCountry.population / 100000;
+  }
+
+  getGlobalData(currentCountry) {
+    const coefficient = RequestForAPI.getCoef100kPopulation(currentCountry);
+    switch (this.currentIndicator) {
+      case 'cases':
+        return this.isAbsoluteValue ? currentCountry.cases : (currentCountry.cases / coefficient).toFixed(2);
+      case 'death':
+        return this.isAbsoluteValue ? currentCountry.deaths : (currentCountry.deaths / coefficient).toFixed(2);
+      case 'recovered':
+        return this.isAbsoluteValue ? currentCountry.recovered : (currentCountry.recovered / coefficient).toFixed(2);
+      default:
+        return false;
+    }
+  }
+
+  getTodayData(currentCountry) {
+    const coefficient = RequestForAPI.getCoef100kPopulation(currentCountry);
+    switch (this.currentIndicator) {
+      case 'cases':
+        return this.isAbsoluteValue ? currentCountry.todayCases : (currentCountry.todayCases / coefficient).toFixed(4);
+      case 'death':
+        return this.isAbsoluteValue
+          ? currentCountry.todayDeaths
+          : (currentCountry.todayDeaths / coefficient).toFixed(4);
+      case 'recovered':
+        return this.isAbsoluteValue
+          ? currentCountry.todayRecovered
+          : (currentCountry.todayRecovered / coefficient).toFixed(4);
+      default:
+        return false;
+    }
+  }
+
+  getNewIndicator(direction) {
+    const currentIndex =
+      this.CurrentIndexOfIndicators + direction >= 0 && this.CurrentIndexOfIndicators + direction < 3
+        ? this.CurrentIndexOfIndicators + direction
+        : this.CurrentIndexOfIndicators;
+    this.CurrentIndexOfIndicators = currentIndex;
+    this.currentIndicator = this.indicators[currentIndex];
+    return this.currentIndicator[0].toUpperCase() + this.currentIndicator.slice(1);
   }
 }
