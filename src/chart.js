@@ -1,11 +1,6 @@
-const Chart = require('chart.js');
+import { CHART_DATA } from './constants/CHART_DATA';
 
-const DATASETS = [
-  { key: 'cases', label: 'Cases', borderColor: '#109e92' },
-  { key: 'active', label: 'Active', borderColor: '#FD8D3C' },
-  { key: 'deaths', label: 'Deaths', borderColor: '#E31A1C' },
-  { key: 'recovered', label: 'Recovered', borderColor: '#FED976' },
-];
+const Chart = require('chart.js');
 
 export default class Charts {
   constructor() {
@@ -16,7 +11,7 @@ export default class Charts {
   setData(data) {
     this.days = data.map((day) => new Date(day.date));
 
-    this.chartData = DATASETS.map((el) => ({
+    this.chartData = [...CHART_DATA].map((el) => ({
       ...el,
       data: data.map((item) => item[el.key] || 0),
     }));
@@ -30,6 +25,7 @@ export default class Charts {
     <canvas id="myChart" class="chart"></canvas>`;
     CHART = global.document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(CHART, {
+      ...CHART_DATA,
       type: 'line',
       data: {
         labels: this.days,
