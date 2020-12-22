@@ -50,6 +50,7 @@ function setTables(data) {
 
 function startApp() {
   RequestForAPI.getSummary().then((data) => {
+    console.log(data);
     requestForAPI.setData(data);
     requestForAPI.sortData();
     setTables(data);
