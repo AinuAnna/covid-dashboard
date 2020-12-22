@@ -132,7 +132,7 @@ export default class RequestForAPI {
   }
 
   getDataDependOnToggles(currentCountry) {
-    return this.isGlobal ? this.getGlobalData(currentCountry) : this.getTodayData(currentCountry);
+    return Number(this.isGlobal ? this.getGlobalData(currentCountry) : this.getTodayData(currentCountry));
   }
 
   static getCoef100kPopulation(currentCountry) {
