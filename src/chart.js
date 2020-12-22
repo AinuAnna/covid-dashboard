@@ -26,9 +26,7 @@ export default class Charts {
   render() {
     let CHART = global.document.getElementById('myChart').getContext('2d');
     global.document.getElementById('myChart').remove();
-    global.document.querySelector(
-      '.redraw'
-    ).innerHTML = `<div class = "text"><span class="content-box__title">Daily Cases</span></div>
+    global.document.querySelector('.redraw').innerHTML = `<span class="content-box__title">Daily Cases</span>
     <canvas id="myChart" class="chart"></canvas>`;
     CHART = global.document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(CHART, {

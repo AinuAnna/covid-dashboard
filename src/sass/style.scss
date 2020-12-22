@@ -56,6 +56,27 @@ footer {
   flex-direction: column;
   justify-content: center;
 }
+.container__left {
+  width: 23em;
+  @media only screen and (max-width: 720px) {
+    width: 100%;
+  }
+}
+.container__right {
+  width: 37em;
+  @media only screen and (max-width: 720px) {
+    width: 100%;
+  }
+  .tables .content-box:first-child {
+    margin-right: 0.5rem;
+  }
+
+  @media only screen and (max-width: 720px) {
+    .tables .content-box {
+      margin-top: 0.5rem;
+    }
+  }
+}
 .container__right > div {
   display: flex;
   flex-direction: row;
@@ -67,7 +88,7 @@ footer {
   }
 }
 .container .map {
-  position: relative;
+  // position: relative;
   flex: 1;
   margin: 0 0.5rem;
   background: #2a2f43;
@@ -95,16 +116,20 @@ footer {
       height: 110px;
     }
   }
-  &.country {
-    height: 100%;
+  .cases-by-country-filter {
+    margin-bottom: 5px;
+  }
+  #cases-by-country {
+    height: calc(100% - 140px);
     overflow: auto;
     text-align: center;
-    position: sticky;
+  }
+  &.country {
     #search-country {
-      width: 22rem;
+      width: 100%;
       background-color: #ffffffcb;
       position: sticky;
-      height: 20%;
+      height: 23px;
     }
     @media only screen and (max-width: 720px) {
       height: 400px;
@@ -115,7 +140,7 @@ footer {
   .recovered__table {
     cursor: pointer;
     border-bottom: 1px solid #616ed459;
-    padding: 5px 0 5px 7px;
+    padding: 5px 7px 5px 7px;
 
     &:hover {
       background-color: #f9b54fcb;
@@ -131,19 +156,6 @@ footer {
     @media only screen and (max-width: 720px) {
       height: 110px;
       margin-bottom: 0.5rem;
-    }
-    &.expanded {
-      z-index: 9999999;
-      position: absolute;
-      display: block;
-      width: 100%;
-      height: calc(100vh - 119px);
-      top: 58px;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      padding-left: 8px;
-      margin: 0;
     }
   }
   &.expanded .expand {
@@ -168,56 +180,58 @@ footer {
     left: 0;
     padding-left: 8px;
     margin: 0;
+    #deaths,
+    #recovered {
+      width: 100%;
+    }
   }
 }
 .country__table {
   display: flex;
   justify-content: space-between;
 }
-.content-box#deaths {
-  width: 17.2em;
-  margin-right: 0.5rem;
-  overflow: auto;
-  text-align: center;
-  @media only screen and (max-width: 720px) {
-    height: 400px;
-    margin-top: 0.5rem;
-    width: 100%;
-  }
-  &.expanded {
-    width: 100%;
+.content-box {
+  #deaths {
+    width: 17.2em;
+    height: calc(100% - 105px);
+    overflow: auto;
+    text-align: center;
+    @media only screen and (max-width: 720px) {
+      height: 400px;
+      margin-top: 0.5rem;
+      width: 100%;
+    }
   }
   :first-child {
     text-align: center;
   }
 }
 .content-box {
+  &.expanded #map {
+    margin: auto 20%;
+    width: auto;
+    height: calc(100vh - 155px);
+    @media only screen and (max-width: 720px) {
+      width: 100%;
+      margin: 0;
+      margin-top: 25px;
+      height: calc(100vh - 155px);
+    }
+  }
   #map {
     width: 100%;
     margin-top: 25px;
     height: calc(100vh - 155px);
-  }
-  &.expanded {
-    width: 100%;
-    height: calc(100vh - 119px);
-    height: calc(100vh - 165px);
-    top: 58px;
-    bottom: 0;
-    left: 0;
-    margin: 0;
-    padding: 0;
     .expand {
       margin-left: 8px;
     }
-    #map {
-      height: calc(100vh - 145px);
-    }
   }
 }
-.dlobal-death,
-.dlobal-recovered,
-.dlobal-cases,
+.global-deaths,
+.global-recovered,
+.global-cases,
 #last-date {
+  text-align: center;
   font-size: 2em;
   color: #f9b64f;
   margin-bottom: 10px;
@@ -227,40 +241,30 @@ footer {
   display: flex;
   justify-content: space-between;
 }
-.content-box#recovered {
-  width: 17em;
-  margin-left: 0.25rem;
-  overflow: auto;
-  text-align: center;
-  &.expanded {
-    width: 100%;
-    height: calc(100vh - 119px);
-    top: 58px;
-    left: 0;
-    margin: 0;
-  }
-  @media only screen and (max-width: 720px) {
-    margin-top: 0.5rem;
-    height: 400px;
-    width: 100%;
+.content-box {
+  #recovered {
+    width: 17em;
+    height: calc(100% - 105px);
+    overflow: auto;
+    text-align: center;
+
+    @media only screen and (max-width: 720px) {
+      margin-top: 0.5rem;
+      height: 400px;
+      width: 100%;
+    }
   }
 }
-.content-box#daily {
-  margin-top: 0.2rem;
-  width: 35em;
+.chart {
+  margin-top: 0.5rem;
+  width: 37em;
+  height: calc(100% - 8px);
   overflow: hidden;
   text-align: center;
+
   @media only screen and (max-width: 720px) {
     margin-top: 0.5rem;
     width: 100%;
-  }
-  &.expanded {
-    width: 100%;
-    height: calc(100vh - 119px);
-    top: 58px;
-    bottom: 0;
-    left: 0;
-    margin: 0;
   }
 }
 .expand {
@@ -277,12 +281,10 @@ footer {
   }
 }
 .content-box__title {
-  margin-left: 30px;
   color: #109e92;
   font-size: 20px;
   font-weight: bold;
-  position: sticky;
-  top: 10px;
+  margin: auto 23px;
   display: flex;
   justify-content: center;
 }
