@@ -13,10 +13,6 @@ const requestForAPI = new RequestForAPI();
 
 Toggles.createToggles();
 
-function getSortedByCasesData(data) {
-  data.sort((a, b) => b.cases - a.cases);
-}
-
 function updateCharts(selectedCountry) {
   if (selectedCountry) {
     RequestForAPI.getHistorical(selectedCountry).then((history) => {
@@ -35,10 +31,7 @@ function setTables(data) {
   const global = requestForAPI.getCountriesAndCases();
   table.setGlobalCases(global);
 
-  getSortedByCasesData(data);
-
-  const sortedGlobal = requestForAPI.getCountriesAndCases();
-  table.setCasesByCountry(sortedGlobal);
+  table.setCasesByCountry(global);
 
   const deaths = requestForAPI.getDeathsCases();
   table.setGlobalDeathsCases(deaths);
@@ -55,6 +48,7 @@ function setTables(data) {
 function startApp() {
   RequestForAPI.getSummary().then((data) => {
     requestForAPI.setData(data);
+    requestForAPI.sortData();
     setTables(data);
     map.updateData(requestForAPI.getCountriesWithLatLonAndCases());
     updateCharts();
@@ -66,7 +60,8 @@ function startApp() {
 }
 
 function update() {
-  // setTables(requestForAPI.data);
+  requestForAPI.sortData();
+  setTables(requestForAPI.data);
   map.updateData(requestForAPI.getCountriesWithLatLonAndCases());
 }
 
