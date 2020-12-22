@@ -58,10 +58,6 @@ function startApp() {
     setTables(data);
     map.updateData(requestForAPI.getCountriesWithLatLonAndCases());
     updateCharts();
-    RequestForAPI.getHistorical('india').then((history) => {
-      // requestForAPI.setData(history);
-      // chart.setData(requestForAPI.getHistoricalData());
-    });
   });
 }
 

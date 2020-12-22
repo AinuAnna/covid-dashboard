@@ -1,9 +1,10 @@
 const Chart = require('chart.js');
 
 const DATASETS = [
-  { key: 'cases', label: 'Active cases', borderColor: '#FD8D3C' },
-  { key: 'deaths', label: 'Deaths cases', borderColor: '#E31A1C' },
-  { key: 'recovered', label: 'Recovered cases', borderColor: '#FED976' },
+  { key: 'cases', label: 'Cases', borderColor: '#109e92' },
+  { key: 'active', label: 'Active', borderColor: '#FD8D3C' },
+  { key: 'deaths', label: 'Deaths', borderColor: '#E31A1C' },
+  { key: 'recovered', label: 'Recovered', borderColor: '#FED976' },
 ];
 
 export default class Charts {
@@ -19,7 +20,6 @@ export default class Charts {
       ...el,
       data: data.map((item) => item[el.key] || 0),
     }));
-
     this.render();
   }
 
@@ -40,9 +40,9 @@ export default class Charts {
       options: {
         legend: {
           display: true,
-          position: 'top',
+          position: 'bottom',
           labels: {
-            fontSize: 14,
+            fontSize: 16,
             fontStyle: 'normal',
             fontColor: '#f1f3fb',
           },
@@ -68,7 +68,7 @@ export default class Charts {
               },
               time: {
                 displayFormats: { month: 'MMM' },
-                tooltipFormat: 'ddd D',
+                tooltipFormat: 'MMM ddd D',
                 unit: 'month',
               },
             },

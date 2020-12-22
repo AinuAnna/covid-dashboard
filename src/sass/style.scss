@@ -46,6 +46,11 @@ footer {
   justify-content: space-between;
   height: calc(100vh - 120px);
   margin: 0.5rem 0;
+  @media only screen and (max-width: 720px) {
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
 }
 .container > section {
   flex-direction: column;
@@ -55,8 +60,11 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  height: 50%;
-  margin-bottom: 0.5rem;
+  height: 60%;
+  @media only screen and (max-width: 720px) {
+    display: inline;
+    width: 100%;
+  }
 }
 .container .map {
   position: relative;
@@ -65,6 +73,12 @@ footer {
   margin: 0 0.5rem;
   background: #2a2f43;
   flex-grow: 3;
+  overflow: hidden;
+  @media only screen and (max-width: 720px) {
+    height: 400px;
+    margin-top: 0.5rem;
+    margin: 0;
+  }
 }
 .content-box {
   position: relative;
@@ -73,15 +87,29 @@ footer {
   padding: 0 0.5rem;
   background: #2a2f43;
   border: 1px solid #616ed4;
+  overflow: hidden;
   &.global {
     height: 10rem;
     margin-bottom: 0.5rem;
     text-align: center;
+    @media only screen and (max-width: 720px) {
+      height: 110px;
+    }
   }
   &.country {
     height: 100%;
     overflow: auto;
     text-align: center;
+    position: sticky;
+    #search-country {
+      width: 22rem;
+      background-color: #ffffffcb;
+      position: sticky;
+      height: 20%;
+    }
+    @media only screen and (max-width: 720px) {
+      height: 400px;
+    }
   }
   & .country__table,
   .deaths__table,
@@ -89,6 +117,7 @@ footer {
     cursor: pointer;
     border-bottom: 1px solid #616ed459;
     padding: 5px 0 5px 7px;
+
     &:hover {
       background-color: #f9b54fcb;
     }
@@ -97,9 +126,26 @@ footer {
     display: none;
   }
   &.date {
-    height: 5rem;
+    height: 8rem;
     margin-top: 0.5rem;
     text-align: center;
+    @media only screen and (max-width: 720px) {
+      height: 110px;
+      margin-bottom: 0.5rem;
+    }
+    &.expanded {
+      z-index: 9999999;
+      position: absolute;
+      display: block;
+      width: 100%;
+      height: calc(100vh - 119px);
+      top: 58px;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      padding-left: 8px;
+      margin: 0;
+    }
   }
   &.expanded .expand {
     background: url(../assets/collapse.svg) center center no-repeat;
@@ -125,6 +171,9 @@ footer {
     margin: 0;
   }
 }
+#daily {
+  margin-bottom: 0.5px;
+}
 .country__table {
   display: flex;
   justify-content: space-between;
@@ -134,6 +183,11 @@ footer {
   margin-right: 0.5rem;
   overflow: auto;
   text-align: center;
+  @media only screen and (max-width: 720px) {
+    height: 400px;
+    margin-top: 0.5rem;
+    width: 100%;
+  }
   &.expanded {
     width: 100%;
   }
@@ -141,21 +195,36 @@ footer {
     text-align: center;
   }
 }
-.content-box#map {
+.content-box {
+  #map {
+    width: 100%;
+    margin-top: 25px;
+    height: calc(100vh - 155px);
+  }
   &.expanded {
     width: 100%;
     height: calc(100vh - 119px);
+    height: calc(100vh - 165px);
     top: 58px;
     bottom: 0;
     left: 0;
     margin: 0;
+    padding: 0;
+    .expand {
+      margin-left: 8px;
+    }
+    #map {
+      height: calc(100vh - 145px);
+    }
   }
 }
 .dlobal-death,
 .dlobal-recovered,
-.dlobal-cases {
+.dlobal-cases,
+#last-date {
   font-size: 2em;
   color: #f9b64f;
+  margin-bottom: 10px;
 }
 .deaths__table,
 .recovered__table {
@@ -174,12 +243,21 @@ footer {
     left: 0;
     margin: 0;
   }
+  @media only screen and (max-width: 720px) {
+    margin-top: 0.5rem;
+    height: 400px;
+    width: 100%;
+  }
 }
 .content-box#daily {
   margin-top: 0.5rem;
   width: 35em;
   overflow: hidden;
   text-align: center;
+  @media only screen and (max-width: 720px) {
+    margin-top: 0.5rem;
+    width: 100%;
+  }
   &.expanded {
     width: 100%;
     height: calc(100vh - 119px);
@@ -215,7 +293,7 @@ footer {
 /* CHART */
 .chart {
   max-width: 100%;
-  max-height: 706px;
+  max-height: 800px;
 }
 /* FOOTER */
 footer {
@@ -321,11 +399,11 @@ footer {
         background: #78909c;
         color: #b4bbbe;
         &:hover {
-          background: #8fb666;
+          background: #109e92;
         }
       }
       .toggle-active {
-        background: #7cb342;
+        background: #109e9279;
         color: #fff;
       }
     }
