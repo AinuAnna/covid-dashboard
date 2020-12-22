@@ -65,10 +65,21 @@ export default class Map {
   }
 
   createMap() {
-    this.map = L.map('map').setView([51.505, -0.09], 2);
+    this.map = L.map('map', {
+      center: [51.505, -0.09],
+      zoom: 2,
+      minZoom: 2,
+      zoomControl: false,
+      maxBounds: [
+        [90, -180],
+        [-100, 230],
+      ],
+    });
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.map);
+    const zoom = L.control.zoom({ position: 'bottomleft' });
+    zoom.addTo(this.map);
   }
 
   updateMap() {
