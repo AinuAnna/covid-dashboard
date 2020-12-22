@@ -2,24 +2,23 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import geo from './custom.geo.json';
 
-const GRADE = {
-  First: 10000000,
-  Second: 1000000,
-  Third: 100000,
-  Fourth: 10000,
-  Fifth: 1000,
-};
-
 export default class Map {
   constructor() {
     this.createMap();
     this.countries = null;
     this.createInfoBlock();
-    this.createLegend();
+
+    this.grade = {
+      First: 10000000,
+      Second: 1000000,
+      Third: 100000,
+      Fourth: 10000,
+      Fifth: 1000,
+    };
 
     this.addStyle = (feature) => {
       return {
-        fillColor: Map.getColor(this.getCasesOfCountry(feature.properties.iso_a3)),
+        fillColor: this.getColor(this.getCasesOfCountry(feature.properties.iso_a3)),
         weight: 1,
         opacity: 0.5,
         color: 'white',
@@ -49,17 +48,45 @@ export default class Map {
     };
   }
 
+  static round(n) {
+    return Math.round(n / 100) * 100;
+  }
+
+  setGrade() {
+    const coef = this.countries[0].cases > 10000000 ? 10 : 5;
+    const value = Math.round(this.countries[0].cases);
+    this.grade = {
+      First: value,
+      Second: Map.round(value / coef),
+      Third: Map.round(value / (coef * 10)),
+      Fourth: Map.round(value / (coef * 100)),
+      Fifth: Map.round(value / (coef * 1000)),
+    };
+  }
+
   createMap() {
-    this.map = L.map('map').setView([51.505, -0.09], 2);
+    this.map = L.map('map', {
+      center: [51.505, -0.09],
+      zoom: 2,
+      minZoom: 2,
+      zoomControl: false,
+      maxBounds: [
+        [90, -180],
+        [-100, 230],
+      ],
+    });
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.map);
+    const zoom = L.control.zoom({ position: 'bottomleft' });
+    zoom.addTo(this.map);
   }
 
   updateMap() {
     if (this.layerGroup !== undefined) this.layerGroup.removeLayer(this.geojson);
 
     this.geojson = L.geoJSON(geo, { style: this.addStyle, onEachFeature: this.onEachFeature });
+
     this.layerGroup = new L.LayerGroup();
     this.layerGroup.addTo(this.map);
     this.layerGroup.addLayer(this.geojson);
@@ -70,17 +97,17 @@ export default class Map {
     return currentCountry[0] === undefined ? '#fff' : currentCountry[0].cases;
   }
 
-  static getColor(number) {
-    if (number > GRADE.First) {
+  getColor(number) {
+    if (number <= this.grade.First && number > this.grade.Second) {
       return '#800026';
     }
-    if (number > GRADE.Second) {
+    if (number <= this.grade.Second && number > this.grade.Third) {
       return '#BD0026';
     }
-    if (number > GRADE.Third) {
+    if (number <= this.grade.Third && number > this.grade.Fourth) {
       return '#E31A1C';
     }
-    if (number > GRADE.Fourth) {
+    if (number <= this.grade.Fourth && number > this.grade.Fifth) {
       return '#FD8D3C';
     }
     return '#FED976';
@@ -88,7 +115,9 @@ export default class Map {
 
   updateData(countries) {
     this.countries = countries;
+    this.setGrade();
     this.updateMap();
+    this.createLegend();
   }
 
   createInfoBlock() {
@@ -114,17 +143,19 @@ export default class Map {
     this.legend = L.control({ position: 'bottomright' });
 
     this.legend.onAdd = () => {
-      const div = L.DomUtil.create('div', 'map-info map-legend');
-      const grades = [GRADE.First, GRADE.Second, GRADE.Third, GRADE.Fourth, GRADE.Fifth];
+      const div = document.querySelector('.map-legend') || L.DomUtil.create('div', 'map-info map-legend');
+      div.innerHTML = '';
+      const grades = [this.grade.First, this.grade.Second, this.grade.Third, this.grade.Fourth, this.grade.Fifth];
       grades.forEach((element, index) => {
         const container = L.DomUtil.create('div', 'map-legend__container');
-        container.innerHTML += `<i style="background: ${Map.getColor(element + 1)}"></i> 
+        container.innerHTML += `<i style="background: ${this.getColor(element)}"></i> 
           ${element} 
           ${grades[index + 1] ? `—  ${grades[index + 1]}` : '-'}`;
         div.append(container);
       });
       return div;
     };
+
     this.legend.addTo(this.map);
   }
 }

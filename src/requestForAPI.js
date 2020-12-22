@@ -13,7 +13,7 @@ export default class RequestForAPI {
     this.isAbsoluteValue = true;
 
     this.CurrentIndexOfIndicators = 0;
-    this.indicators = ['cases', 'death', 'recovered'];
+    this.indicators = ['cases', 'deaths', 'recovered'];
     this.currentIndicator = this.indicators[this.CurrentIndexOfIndicators];
   }
 
@@ -45,15 +45,21 @@ export default class RequestForAPI {
     this.history = history;
   }
 
+  sortData() {
+    this.data.sort((a, b) => b[this.currentIndicator] - a[this.currentIndicator]);
+  }
+
   getCountriesWithLatLonAndCases() {
-    return this.data.map((el) => {
-      return {
-        country: el.country,
-        iso3: el.countryInfo.iso3,
-        latLon: [el.countryInfo.lat, el.countryInfo.long],
-        cases: this.getDataDependOnToggles(el),
-      };
-    });
+    return this.data
+      .map((el) => {
+        return {
+          country: el.country,
+          iso3: el.countryInfo.iso3,
+          latLon: [el.countryInfo.lat, el.countryInfo.long],
+          cases: this.getDataDependOnToggles(el),
+        };
+      })
+      .sort((a, b) => b.cases - a.cases);
   }
 
   getCountriesAndCases() {
@@ -134,7 +140,7 @@ export default class RequestForAPI {
   }
 
   getDataDependOnToggles(currentCountry) {
-    return this.isGlobal ? this.getGlobalData(currentCountry) : this.getTodayData(currentCountry);
+    return Number(this.isGlobal ? this.getGlobalData(currentCountry) : this.getTodayData(currentCountry));
   }
 
   static getCoef100kPopulation(currentCountry) {
@@ -143,31 +149,26 @@ export default class RequestForAPI {
 
   getGlobalData(currentCountry) {
     const coefficient = RequestForAPI.getCoef100kPopulation(currentCountry);
-    switch (this.currentIndicator) {
-      case 'cases':
-        return this.isAbsoluteValue ? currentCountry.cases : (currentCountry.cases / coefficient).toFixed(2);
-      case 'death':
-        return this.isAbsoluteValue ? currentCountry.deaths : (currentCountry.deaths / coefficient).toFixed(2);
-      case 'recovered':
-        return this.isAbsoluteValue ? currentCountry.recovered : (currentCountry.recovered / coefficient).toFixed(2);
-      default:
-        return false;
-    }
+    return this.isAbsoluteValue
+      ? currentCountry[this.currentIndicator]
+      : (coefficient ? currentCountry[this.currentIndicator] / coefficient : 1).toFixed(2);
   }
 
   getTodayData(currentCountry) {
     const coefficient = RequestForAPI.getCoef100kPopulation(currentCountry);
     switch (this.currentIndicator) {
       case 'cases':
-        return this.isAbsoluteValue ? currentCountry.todayCases : (currentCountry.todayCases / coefficient).toFixed(4);
-      case 'death':
+        return this.isAbsoluteValue
+          ? currentCountry.todayCases
+          : (coefficient !== 0 ? currentCountry.todayCases / coefficient : 1).toFixed(4);
+      case 'deaths':
         return this.isAbsoluteValue
           ? currentCountry.todayDeaths
-          : (currentCountry.todayDeaths / coefficient).toFixed(4);
+          : (coefficient !== 0 ? currentCountry.todayDeaths / coefficient : 1).toFixed(4);
       case 'recovered':
         return this.isAbsoluteValue
           ? currentCountry.todayRecovered
-          : (currentCountry.todayRecovered / coefficient).toFixed(4);
+          : (coefficient !== 0 ? currentCountry.todayRecovered / coefficient : 1).toFixed(4);
       default:
         return false;
     }
