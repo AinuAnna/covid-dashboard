@@ -46,25 +46,59 @@ footer {
   justify-content: space-between;
   height: calc(100vh - 120px);
   margin: 0.5rem 0;
+  @media only screen and (max-width: 720px) {
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
 }
 .container > section {
   flex-direction: column;
   justify-content: center;
 }
+.container__left {
+  width: 23em;
+  @media only screen and (max-width: 720px) {
+    width: 100%;
+  }
+}
+.container__right {
+  width: 37em;
+  @media only screen and (max-width: 720px) {
+    width: 100%;
+  }
+  .tables .content-box:first-child {
+    margin-right: 0.5rem;
+  }
+
+  @media only screen and (max-width: 720px) {
+    .tables .content-box {
+      margin-top: 0.5rem;
+    }
+  }
+}
 .container__right > div {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  height: 50%;
-  margin-bottom: 0.5rem;
+  height: 60%;
+  @media only screen and (max-width: 720px) {
+    display: inline;
+    width: 100%;
+  }
 }
 .container .map {
-  position: relative;
+  // position: relative;
   flex: 1;
-  min-width: 500px;
   margin: 0 0.5rem;
   background: #2a2f43;
   flex-grow: 3;
+  overflow: hidden;
+  @media only screen and (max-width: 720px) {
+    height: 400px;
+    margin-top: 0.5rem;
+    margin: 0;
+  }
 }
 .content-box {
   position: relative;
@@ -73,22 +107,41 @@ footer {
   padding: 0 0.5rem;
   background: #2a2f43;
   border: 1px solid #616ed4;
+  overflow: hidden;
   &.global {
     height: 10rem;
     margin-bottom: 0.5rem;
     text-align: center;
+    @media only screen and (max-width: 720px) {
+      height: 110px;
+    }
   }
-  &.country {
-    height: 100%;
+  .cases-by-country-filter {
+    margin-bottom: 5px;
+  }
+  #cases-by-country {
+    height: calc(100% - 140px);
     overflow: auto;
     text-align: center;
+  }
+  &.country {
+    #search-country {
+      width: 100%;
+      background-color: #ffffffcb;
+      position: sticky;
+      height: 23px;
+    }
+    @media only screen and (max-width: 720px) {
+      height: 400px;
+    }
   }
   & .country__table,
   .deaths__table,
   .recovered__table {
     cursor: pointer;
     border-bottom: 1px solid #616ed459;
-    padding: 5px 0 5px 7px;
+    padding: 5px 7px 5px 7px;
+
     &:hover {
       background-color: #f9b54fcb;
     }
@@ -97,9 +150,13 @@ footer {
     display: none;
   }
   &.date {
-    height: 5rem;
+    height: 8rem;
     margin-top: 0.5rem;
     text-align: center;
+    @media only screen and (max-width: 720px) {
+      height: 110px;
+      margin-bottom: 0.5rem;
+    }
   }
   &.expanded .expand {
     background: url(../assets/collapse.svg) center center no-repeat;
@@ -123,70 +180,91 @@ footer {
     left: 0;
     padding-left: 8px;
     margin: 0;
+    #deaths,
+    #recovered {
+      width: 100%;
+    }
   }
 }
 .country__table {
   display: flex;
   justify-content: space-between;
 }
-.content-box#deaths {
-  width: 17.2em;
-  margin-right: 0.5rem;
-  overflow: auto;
-  text-align: center;
-  &.expanded {
-    width: 100%;
+.content-box {
+  #deaths {
+    width: 17.2em;
+    height: calc(100% - 105px);
+    overflow: auto;
+    text-align: center;
+    @media only screen and (max-width: 720px) {
+      height: 400px;
+      margin-top: 0.5rem;
+      width: 100%;
+    }
   }
   :first-child {
     text-align: center;
   }
 }
-.content-box#map {
-  &.expanded {
+.content-box {
+  &.expanded #map {
+    margin: auto 20%;
+    width: auto;
+    height: calc(100vh - 155px);
+    @media only screen and (max-width: 720px) {
+      width: 100%;
+      margin: 0;
+      margin-top: 25px;
+      height: calc(100vh - 155px);
+    }
+  }
+  #map {
     width: 100%;
-    height: calc(100vh - 119px);
-    top: 58px;
-    bottom: 0;
-    left: 0;
-    margin: 0;
+    margin-top: 25px;
+    height: calc(100vh - 155px);
+    .expand {
+      margin-left: 8px;
+    }
   }
 }
-.dlobal-death,
-.dlobal-recovered,
-.dlobal-cases {
+.global-deaths,
+.global-recovered,
+.global-cases,
+#last-date {
+  text-align: center;
   font-size: 2em;
   color: #f9b64f;
+  margin-bottom: 10px;
 }
 .deaths__table,
 .recovered__table {
   display: flex;
   justify-content: space-between;
 }
-.content-box#recovered {
-  width: 17em;
-  margin-left: 0.25rem;
-  overflow: auto;
-  text-align: center;
-  &.expanded {
-    width: 100%;
-    height: calc(100vh - 119px);
-    top: 58px;
-    left: 0;
-    margin: 0;
+.content-box {
+  #recovered {
+    width: 17em;
+    height: calc(100% - 105px);
+    overflow: auto;
+    text-align: center;
+
+    @media only screen and (max-width: 720px) {
+      margin-top: 0.5rem;
+      height: 400px;
+      width: 100%;
+    }
   }
 }
-.content-box#daily {
+.chart {
   margin-top: 0.5rem;
-  width: 35em;
+  width: 37em;
+  height: calc(100% - 8px);
   overflow: hidden;
   text-align: center;
-  &.expanded {
+
+  @media only screen and (max-width: 720px) {
+    margin-top: 0.5rem;
     width: 100%;
-    height: calc(100vh - 119px);
-    top: 58px;
-    bottom: 0;
-    left: 0;
-    margin: 0;
   }
 }
 .expand {
@@ -203,19 +281,17 @@ footer {
   }
 }
 .content-box__title {
-  margin-left: 30px;
   color: #109e92;
   font-size: 20px;
   font-weight: bold;
-  position: sticky;
-  top: 10px;
+  margin: auto 23px;
   display: flex;
   justify-content: center;
 }
 /* CHART */
 .chart {
   max-width: 100%;
-  max-height: 706px;
+  max-height: 800px;
 }
 /* FOOTER */
 footer {
@@ -321,11 +397,11 @@ footer {
         background: #78909c;
         color: #b4bbbe;
         &:hover {
-          background: #8fb666;
+          background: #109e92;
         }
       }
       .toggle-active {
-        background: #7cb342;
+        background: #109e9279;
         color: #fff;
       }
     }

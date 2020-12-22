@@ -1,10 +1,6 @@
-const Chart = require('chart.js');
+import { CHART_DATA } from './constants/CHART_DATA';
 
-const DATASETS = [
-  { key: 'cases', label: 'Active cases', borderColor: '#FD8D3C' },
-  { key: 'deaths', label: 'Deaths cases', borderColor: '#E31A1C' },
-  { key: 'recovered', label: 'Recovered cases', borderColor: '#FED976' },
-];
+const Chart = require('chart.js');
 
 export default class Charts {
   constructor() {
@@ -15,23 +11,21 @@ export default class Charts {
   setData(data) {
     this.days = data.map((day) => new Date(day.date));
 
-    this.chartData = DATASETS.map((el) => ({
+    this.chartData = [...CHART_DATA].map((el) => ({
       ...el,
       data: data.map((item) => item[el.key] || 0),
     }));
-
     this.render();
   }
 
   render() {
     let CHART = global.document.getElementById('myChart').getContext('2d');
     global.document.getElementById('myChart').remove();
-    global.document.querySelector(
-      '.redraw'
-    ).innerHTML = `<div class = "text"><span class="content-box__title">Daily Cases</span></div>
+    global.document.querySelector('.redraw').innerHTML = `<span class="content-box__title">Daily Cases</span>
     <canvas id="myChart" class="chart"></canvas>`;
     CHART = global.document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(CHART, {
+      ...CHART_DATA,
       type: 'line',
       data: {
         labels: this.days,
@@ -40,9 +34,9 @@ export default class Charts {
       options: {
         legend: {
           display: true,
-          position: 'top',
+          position: 'bottom',
           labels: {
-            fontSize: 14,
+            fontSize: 16,
             fontStyle: 'normal',
             fontColor: '#f1f3fb',
           },
@@ -68,7 +62,7 @@ export default class Charts {
               },
               time: {
                 displayFormats: { month: 'MMM' },
-                tooltipFormat: 'ddd D',
+                tooltipFormat: 'MMM ddd D',
                 unit: 'month',
               },
             },

@@ -100,12 +100,18 @@ export default class RequestForAPI {
 
   getGlobalCases() {
     const merged = [
-      ...new Set(Object.keys(this.total.cases), Object.keys(this.total.deaths), Object.keys(this.total.recovered)),
+      ...new Set(
+        Object.keys(this.total.cases),
+        Object.keys(this.total.cases - this.total.recovered - this.total.deaths),
+        Object.keys(this.total.deaths),
+        Object.keys(this.total.recovered)
+      ),
     ];
     return merged.map((el) => {
       return {
         date: new Date(el),
         cases: this.total.cases[el],
+        active: this.total.cases[el] - this.total.recovered[el] - this.total.deaths[el],
         deaths: this.total.deaths[el],
         recovered: this.total.recovered[el],
       };
@@ -117,6 +123,7 @@ export default class RequestForAPI {
     const merged = [
       ...new Set(
         Object.keys(historyTimeline.cases),
+        Object.keys(historyTimeline.cases - historyTimeline.recovered - historyTimeline.deaths),
         Object.keys(historyTimeline.deaths),
         Object.keys(historyTimeline.recovered)
       ),
@@ -125,6 +132,7 @@ export default class RequestForAPI {
       return {
         date: new Date(el),
         cases: historyTimeline.cases[el],
+        active: historyTimeline.cases[el] - historyTimeline.recovered[el],
         deaths: historyTimeline.deaths[el],
         recovered: historyTimeline.recovered[el],
       };

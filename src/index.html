@@ -11,16 +11,20 @@
     </header>
     <div class="container">
       <section class="container__left">
-        <div id="global-cases" class="content-box global">
+        <div class="content-box global">
           <div class="expand"></div>
           <span class="content-box__title">Global Cases</span>
+          <div class="global-cases"></div>
         </div>
         <div class="content-box country">
           <div class="expand"></div>
-          <div id="cases-by-country">
+          <div class="cases-by-country-filter">
             <span class="content-box__title">Cases by Country</span>
             <input type="text" id="search-country" />
           </div>
+          <div id="cases-by-country">
+          </div>
+
           <div class="toggles"></div>
         </div>
 
@@ -32,31 +36,37 @@
       </section>
 
       <section class="map">
-        <div class="content-box" id="map">
+        <div class="content-box">
           <div class="expand"></div>
+          <div id="map"></div>
         </div>
       </section>
 
       <section class="container__right">
         <div class="tables">
-          <div class="content-box" id="deaths">
+          <div class="content-box" >
             <div class="expand"></div>
             <span class="content-box__title">Global Deaths</span>
+            <div class="global-deaths"></div>
+            <div id="deaths"></div>
           </div>
-          <div class="content-box" id="recovered">
+          <div class="content-box" >
             <div class="expand"></div>
             <span class="content-box__title">Global Recovered</span>
+            <div class="global-recovered"></div>
+            <div id="recovered"></div>
           </div>
         </div>
         <div class="chart">
-          <div class="content-box" id="daily">
+          <div class="content-box">
             <div class="expand"></div>
             <div class="redraw">
               <span class="content-box__title">Daily Cases</span>
               <canvas id="myChart" class="chart"></canvas>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
       </section>
     </div>
     <footer>

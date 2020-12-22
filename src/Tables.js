@@ -10,12 +10,9 @@ export default class Tables {
     this.lastDate = 0;
   }
 
-  createDivGlobal(element) {
-    const TABLE = document.getElementById('global-cases');
-    const createDivGlobal = document.createElement('div');
-    createDivGlobal.className = 'dlobal-cases';
-    createDivGlobal.innerHTML = `<span>${element}</span>`;
-    TABLE.appendChild(createDivGlobal);
+  updateTotal(className, value) {
+    const div = document.querySelector(className);
+    div.innerHTML = `<span>${value}</span>`;
   }
 
   setGlobalCases(cases) {
@@ -26,7 +23,7 @@ export default class Tables {
       }
       return acc + item.cases;
     }, 0);
-    this.createDivGlobal(this.dataGlobalCases);
+    this.updateTotal('.global-cases', this.dataGlobalCases.toFixed(0));
   }
 
   createDivCases() {
@@ -74,14 +71,6 @@ export default class Tables {
     this.createDivDeaths();
   }
 
-  createDivGlobalDeaths(element) {
-    const TABLE = document.getElementById('deaths');
-    const createDivDeaths = document.createElement('div');
-    createDivDeaths.className = 'dlobal-death';
-    createDivDeaths.innerHTML = `<span>${element}</span>`;
-    TABLE.appendChild(createDivDeaths);
-  }
-
   setGlobalDeathsCases(deaths) {
     this.deaths = deaths;
     this.dataByDeaths = deaths.reduce((acc, item) => {
@@ -90,7 +79,7 @@ export default class Tables {
       }
       return acc + item.deaths;
     }, 0);
-    this.createDivGlobalDeaths(this.dataByDeaths);
+    this.updateTotal('.global-deaths', this.dataByDeaths);
   }
 
   createDivRecovered() {
@@ -115,14 +104,6 @@ export default class Tables {
     this.createDivRecovered();
   }
 
-  createDivGlobalRecovered(element) {
-    const TABLE = document.getElementById('recovered');
-    const createDivRecovered = document.createElement('div');
-    createDivRecovered.className = 'dlobal-recovered';
-    createDivRecovered.innerHTML = `<span>${element}</span>`;
-    TABLE.appendChild(createDivRecovered);
-  }
-
   setGlobalRecoveredCases(recovered) {
     this.recovered = recovered;
     this.dataByRecovered = recovered.reduce((acc, item) => {
@@ -131,7 +112,7 @@ export default class Tables {
       }
       return acc + item.recovered;
     }, 0);
-    this.createDivGlobalRecovered(this.dataByRecovered);
+    this.updateTotal('.global-recovered', this.dataByRecovered);
   }
 
   createDivDate(element) {
