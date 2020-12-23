@@ -210,18 +210,18 @@ footer {
   &.expanded #map {
     margin: auto 20%;
     width: auto;
-    height: calc(100vh - 155px);
+    height: calc(100vh - 227px);
     @media only screen and (max-width: 720px) {
       width: 100%;
       margin: 0;
       margin-top: 25px;
-      height: calc(100vh - 155px);
+      height: calc(100vh - 227px);
     }
   }
   #map {
     width: 100%;
     margin-top: 25px;
-    height: calc(100vh - 155px);
+    height: calc(100vh - 227px);
     .expand {
       margin-left: 8px;
     }
@@ -378,6 +378,9 @@ footer {
       &:hover {
         background-color: rgba($color: #ffffff, $alpha: 0.3);
       }
+      &:active {
+        opacity: 0.8;
+      }
     }
     .current-indicator {
       width: 80%;
@@ -398,6 +401,9 @@ footer {
         color: #b4bbbe;
         &:hover {
           background: #109e92;
+        }
+        &:active {
+          background: #075e56;
         }
       }
       .toggle-active {
@@ -426,15 +432,27 @@ footer {
   td,
   th {
     width: 200px;
-    padding: 2px 10px;
+    padding: 4px 10px;
+    text-align: center;
   }
 
   &__subtitle {
     color: #109e92;
     font-weight: 400;
   }
-
+  .global-data {
+    font-weight: 500;
+  }
+  .today-data {
+    font-weight: 400;
+    font-size: 15px;
+  }
   #current-country {
     font-weight: 700;
   }
+}
+
+.field-select {
+  background: rgba($color: #f9b54fcb, $alpha: 0.3);
+  border-radius: 10px;
 }
