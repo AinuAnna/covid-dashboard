@@ -375,7 +375,7 @@ footer {
   margin: 0;
 }
 .toggles {
-  position: sticky;
+  position: absolute;
   z-index: 99;
   bottom: 0;
   right: 0;
@@ -413,7 +413,7 @@ footer {
       .toggle-button {
         @include button;
         width: 3.75rem;
-        height: 2rem;
+        height: 1.5rem;
         margin: 0;
         background: #78909c;
         color: #b4bbbe;
