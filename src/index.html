@@ -39,23 +39,38 @@
         <div class="content-box">
           <div class="expand"></div>
           <div id="map"></div>
+          <div class="toggles"></div>  
         </div>
       </section>
 
       <section class="container__right">
-        <div class="tables">
-          <div class="content-box" >
-            <div class="expand"></div>
-            <span class="content-box__title">Global Deaths</span>
-            <div class="global-deaths"></div>
-            <div id="deaths"></div>
-          </div>
-          <div class="content-box" >
-            <div class="expand"></div>
-            <span class="content-box__title">Global Recovered</span>
-            <div class="global-recovered"></div>
-            <div id="recovered"></div>
-          </div>
+        <div class="content-box tables">
+          <div class="expand"></div>
+          <table class='table'>
+            <caption class="table__title">Information</caption>
+               <tr>
+                  <th></th>
+                  <th class="table__subtitle">Cases</th>
+                  <th class="table__subtitle">Deaths</th>
+                  <th class="table__subtitle">Recovered</th>
+               </tr>
+               <tr>
+                  <td id="current-country" colspan="4">Global</td>
+               </tr>
+               <tr class="global-data">
+                <td class="table__subtitle">Total: </td>
+                <td id="table-cases"></td>
+                <td id="table-deaths"></td>
+                <td id="table-recovered"></td>
+             </tr>
+               <tr class="today-data">
+                <td class="table__subtitle">Today: </td>
+                <td id="table-today-cases"></td>
+                <td id="table-today-deaths"></td>
+                <td id="table-today-recovered"></td>
+             </tr>
+         </table>     
+         <div class="toggles"></div>     
         </div>
         <div class="chart">
           <div class="content-box">

@@ -49,72 +49,6 @@ export default class Tables {
     this.createDivCases();
   }
 
-  createDivDeaths() {
-    const TABLE = document.getElementById('deaths');
-    for (let i = 0; i < this.dataByDeaths.length; i += 1) {
-      const createDivDeaths = document.createElement('div');
-      createDivDeaths.className = 'deaths__table';
-      createDivDeaths.setAttribute('data-country', this.dataByCases[i].country);
-      createDivDeaths.innerHTML = `<span>${this.dataByDeaths[i].deaths}</span><span>${this.dataByDeaths[i].country}</span>`;
-      TABLE.appendChild(createDivDeaths);
-    }
-  }
-
-  setCasesByDeaths(cases) {
-    this.cases = cases;
-    this.dataByDeaths = cases.map((item) => {
-      return {
-        deaths: item.deaths,
-        country: item.country,
-      };
-    });
-    this.createDivDeaths();
-  }
-
-  setGlobalDeathsCases(deaths) {
-    this.deaths = deaths;
-    this.dataByDeaths = deaths.reduce((acc, item) => {
-      if (item.deaths === null && undefined) {
-        item.deaths = this.item;
-      }
-      return acc + item.deaths;
-    }, 0);
-    this.updateTotal('.global-deaths', this.dataByDeaths);
-  }
-
-  createDivRecovered() {
-    const TABLE = document.getElementById('recovered');
-    for (let i = 0; i < this.dataByRecovered.length; i += 1) {
-      const createDivRecovered = document.createElement('div');
-      createDivRecovered.className = 'recovered__table';
-      createDivRecovered.setAttribute('data-country', this.dataByCases[i].country);
-      createDivRecovered.innerHTML = `<span>${this.dataByRecovered[i].recovered}</span><span>${this.dataByRecovered[i].country}</span>`;
-      TABLE.appendChild(createDivRecovered);
-    }
-  }
-
-  setCasesByRecovered(cases) {
-    this.cases = cases;
-    this.dataByRecovered = cases.map((item) => {
-      return {
-        recovered: item.recovered,
-        country: item.country,
-      };
-    });
-    this.createDivRecovered();
-  }
-
-  setGlobalRecoveredCases(recovered) {
-    this.recovered = recovered;
-    this.dataByRecovered = recovered.reduce((acc, item) => {
-      if (item.recovered === null && undefined) {
-        item.recovered = this.item;
-      }
-      return acc + item.recovered;
-    }, 0);
-    this.updateTotal('.global-recovered', this.dataByRecovered);
-  }
-
   createDivDate(element) {
     const TABLE = document.getElementById('last-date');
     TABLE.innerHTML = `${moment(element).format('MMM Do YY')}`;
@@ -128,5 +62,12 @@ export default class Tables {
       };
     });
     this.createDivDate();
+  }
+
+  clearTables() {
+    const clearTables = document.getElementById('cases-by-country'); // deaths, recovered
+    while (clearTables.firstChild) {
+      clearTables.removeChild(clearTables.firstChild);
+    }
   }
 }
