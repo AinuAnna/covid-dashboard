@@ -74,12 +74,27 @@ function setupResizeButtons() {
     })
   );
 }
+function clearActive(element) {
+  const childs = element.querySelectorAll('.active');
+  childs.forEach((el) => {
+    el.classList.remove('active');
+  });
+}
 function onClickCountry() {
   const elements = document.getElementById('cases-by-country');
   elements.addEventListener('click', (event) => {
     const selectedCountry = event.target.closest('div').dataset.country;
-    updateCharts(selectedCountry);
-    mainTable.updateData(...requestForAPI.getDataForTable(selectedCountry));
+    const previousActiveElement = event.target.closest('div').parentElement.querySelector('.active');
+    const previousContry = !!previousActiveElement && previousActiveElement.dataset.country;
+    if (previousContry === selectedCountry) {
+      updateCharts();
+      mainTable.updateData(...requestForAPI.getDataForTable('Global'));
+    } else {
+      clearActive(event.target.closest('div').parentElement);
+      updateCharts(selectedCountry);
+      mainTable.updateData(...requestForAPI.getDataForTable(selectedCountry));
+    }
+    event.target.closest('div').classList.toggle('active');
   });
 }
 

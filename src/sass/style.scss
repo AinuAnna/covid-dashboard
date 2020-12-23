@@ -66,7 +66,7 @@ footer {
   }
 }
 .container__right {
-  width: 30em;
+  width: 31em;
   @media (max-width: 900px) {
     width: 100%;
     margin-top: 0.5rem;
@@ -403,7 +403,6 @@ footer {
 }
 .content-box.tables {
   margin-bottom: 0.5rem;
-  min-height: 300px;
   .toggles {
     position: absolute;
   }
@@ -414,6 +413,7 @@ footer {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  min-height: 100px;
   tr {
     padding: 10px;
   }
@@ -443,4 +443,7 @@ footer {
 }
 .active {
   background-color: #f9b64f;
+}
+.redraw {
+  min-height: 300px;
 }

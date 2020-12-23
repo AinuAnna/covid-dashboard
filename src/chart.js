@@ -26,6 +26,7 @@ export default class Charts {
     CHART = global.document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(CHART, {
       ...CHART_DATA,
+
       type: 'line',
       data: {
         labels: this.days,
@@ -36,7 +37,7 @@ export default class Charts {
           display: true,
           position: 'bottom',
           labels: {
-            fontSize: '14',
+            fontSize: 12,
             fontStyle: 'normal',
             fontColor: '#f1f3fb',
           },
@@ -79,6 +80,10 @@ export default class Charts {
           ],
         },
       },
+    });
+    window.addEventListener('resize', function (event) {
+      // do stuff here
+      myChart.render();
     });
   }
 }
