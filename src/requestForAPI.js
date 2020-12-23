@@ -74,24 +74,6 @@ export default class RequestForAPI {
       .sort((a, b) => b.cases - a.cases);
   }
 
-  getDeathsCases() {
-    return this.data.map((el) => {
-      return {
-        deaths: el.deaths,
-        country: el.country,
-      };
-    });
-  }
-
-  getRecoveredCases() {
-    return this.data.map((el) => {
-      return {
-        recovered: el.recovered,
-        country: el.country,
-      };
-    });
-  }
-
   getLastDate() {
     return this.data.map((el) => {
       return {
