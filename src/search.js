@@ -1,8 +1,8 @@
-document.getElementById('search-country').oninput = () => {
+document.getElementById('search-country').oninput = function () {
   const search = this.value.trim().toLowerCase();
   const hideCountry = document.querySelectorAll('.country__table');
   if (search !== '') {
-    hideCountry.forEach((elem) => {
+    hideCountry.forEach(function (elem) {
       if (elem.innerText.toLowerCase().search(search) === -1) {
         elem.classList.add('hide');
       } else {
@@ -10,7 +10,7 @@ document.getElementById('search-country').oninput = () => {
       }
     });
   } else {
-    hideCountry.forEach((elem) => {
+    hideCountry.forEach(function (elem) {
       elem.classList.remove('hide');
     });
   }

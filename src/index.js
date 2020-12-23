@@ -63,7 +63,7 @@ function setupResizeButtons() {
   const buttons = global.document.querySelectorAll('.expand');
 
   buttons.forEach((el) =>
-    el.addEventListener('click', () => {
+    el.addEventListener('click', function () {
       this.parentElement.classList.toggle('expanded');
     })
   );
