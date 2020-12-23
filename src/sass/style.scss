@@ -46,7 +46,7 @@ footer {
   justify-content: space-between;
   height: calc(100vh - 120px);
   margin: 0.5rem 0;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 900px) {
     flex-direction: column;
     width: 100%;
     height: 100%;
@@ -58,40 +58,39 @@ footer {
 }
 .container__left {
   width: 23em;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 900px) {
     width: 100%;
   }
 }
 .container__right {
-  width: 27em;
-  @media only screen and (max-width: 768px) {
+  width: 30em;
+  @media only screen and (max-width: 900px) {
     width: 100%;
   }
   .tables .content-box:first-child {
     margin-right: 0.5rem;
   }
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 900px) {
     .tables .content-box {
       margin-top: 0.5rem;
     }
   }
 }
 .container__right > div {
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 900px) {
     display: inline;
     height: 300px;
     width: 100%;
   }
 }
 .container .map {
-  // position: relative;
   flex: 1;
   margin: 0 0.5rem;
   background: #2a2f43;
   flex-grow: 3;
   overflow: hidden;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 900px) {
     height: 400px;
     margin-top: 0.5rem;
     margin: 0;
@@ -106,10 +105,10 @@ footer {
   border: 1px solid #616ed4;
   overflow: hidden;
   &.global {
-    height: 10rem;
     margin-bottom: 0.5rem;
     text-align: center;
-    @media only screen and (max-width: 768px) {
+    height: 10rem;
+    @media only screen and (max-width: 900px) {
       height: 110px;
     }
   }
@@ -128,7 +127,7 @@ footer {
       position: sticky;
       height: 23px;
     }
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 900px) {
       height: 400px;
     }
   }
@@ -147,10 +146,10 @@ footer {
     display: none;
   }
   &.date {
-    height: 8rem;
     margin-top: 0.5rem;
     text-align: center;
-    @media only screen and (max-width: 768px) {
+    height: 10rem;
+    @media only screen and (max-width: 900px) {
       height: 110px;
       margin-bottom: 0.5rem;
     }
@@ -193,7 +192,7 @@ footer {
     height: calc(100% - 105px);
     overflow: auto;
     text-align: center;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 900px) {
       height: 400px;
       margin-top: 0.5rem;
       width: 100%;
@@ -208,7 +207,7 @@ footer {
     margin: auto 20%;
     width: auto;
     height: calc(100vh - 155px);
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 900px) {
       width: 100%;
       margin: 0;
       margin-top: 25px;
@@ -232,6 +231,12 @@ footer {
   font-size: 2em;
   color: #f9b64f;
   margin-bottom: 10px;
+  @media only screen and (max-width: 1000px) {
+    font-size: 1.5rem;
+  }
+  @media only screen and (max-height: 900px) {
+    font-size: 1.5rem;
+  }
 }
 .deaths__table,
 .recovered__table {
@@ -245,23 +250,25 @@ footer {
     overflow: auto;
     text-align: center;
 
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 900px) {
       margin-top: 0.5rem;
       height: 400px;
       width: 100%;
     }
   }
 }
-.chart {
-  margin-top: 0.5rem;
-  width: 37em;
-  height: calc(100% - 8px);
+.container__right .chart {
   overflow: hidden;
   text-align: center;
-
-  @media only screen and (max-width: 768px) {
-    margin-top: 0.5rem;
+  height: 51rem;
+  @media only screen and (max-width: 900px) {
     width: 100%;
+    height: 35rem;
+  }
+}
+.content-box {
+  &.expanded .redraw {
+    margin: 5% 20%;
   }
 }
 .expand {
@@ -284,11 +291,6 @@ footer {
   margin: auto 23px;
   display: flex;
   justify-content: center;
-}
-/* CHART */
-.chart {
-  max-width: 100%;
-  max-height: 800px;
 }
 /* FOOTER */
 footer {
@@ -404,8 +406,9 @@ footer {
     }
   }
 }
-.tables {
+.content-box.tables {
   position: relative;
+  margin-bottom: 0.5rem;
   .toggles {
     position: absolute;
   }

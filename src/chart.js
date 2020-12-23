@@ -22,7 +22,7 @@ export default class Charts {
     let CHART = global.document.getElementById('myChart').getContext('2d');
     global.document.getElementById('myChart').remove();
     global.document.querySelector('.redraw').innerHTML = `<span class="content-box__title">Daily Cases</span>
-    <canvas id="myChart" class="chart"></canvas>`;
+   <canvas id="myChart" class="chart"></canvas>`;
     CHART = global.document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(CHART, {
       ...CHART_DATA,
