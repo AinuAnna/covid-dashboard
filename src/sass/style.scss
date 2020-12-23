@@ -262,6 +262,21 @@ footer {
     }
   }
 }
+.content-box.chart {
+  display: flex;
+  flex-direction: column;
+  .chart-container {
+    flex: 1 1 auto;
+    position: relative;
+    .redraw {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
+}
 .container__right .chart {
   overflow: hidden;
   text-align: center;

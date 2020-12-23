@@ -25,15 +25,14 @@ export default class Charts {
     CHART = global.document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(CHART, {
       ...CHART_DATA,
-      responsive: true,
-      maintainAspectRatio: true,
-      aspectRatio: 3,
       type: 'line',
       data: {
         labels: this.days,
         datasets: this.chartData,
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         legend: {
           display: true,
           position: 'bottom',
