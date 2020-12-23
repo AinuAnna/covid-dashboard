@@ -6,11 +6,10 @@ export default class Tables {
     this.dataByDeaths = [];
     this.dataByRecovered = [];
     this.cases = null;
-    this.item = 0;
     this.lastDate = 0;
   }
 
-  updateTotal(className, value) {
+  static updateTotal(className, value) {
     const div = document.querySelector(className);
     div.innerHTML = `<span>${value}</span>`;
   }
@@ -18,12 +17,12 @@ export default class Tables {
   setGlobalCases(cases) {
     this.cases = cases;
     this.dataGlobalCases = cases.reduce((acc, item) => {
-      if (item.cases === null && undefined) {
-        item.cases = this.item;
+      if (!item.cases) {
+        return acc;
       }
       return acc + item.cases;
     }, 0);
-    this.updateTotal('.global-cases', this.dataGlobalCases.toFixed(0));
+    Tables.updateTotal('.global-cases', this.dataGlobalCases.toFixed(0));
   }
 
   createDivCases() {
@@ -49,7 +48,7 @@ export default class Tables {
     this.createDivCases();
   }
 
-  createDivDate(element) {
+  static createDivDate(element) {
     const TABLE = document.getElementById('last-date');
     TABLE.innerHTML = `${moment(element).format('MMM Do YY')}`;
   }
@@ -61,10 +60,10 @@ export default class Tables {
         updated: item.updated,
       };
     });
-    this.createDivDate();
+    Tables.createDivDate();
   }
 
-  clearTables() {
+  static clearTables() {
     const clearTables = document.getElementById('cases-by-country'); // deaths, recovered
     while (clearTables.firstChild) {
       clearTables.removeChild(clearTables.firstChild);

@@ -3,7 +3,7 @@ import Tables from './Tables';
 import Charts from './chart';
 import Map from './Map';
 import Toggles from './toggles';
-import search from './search';
+import './search';
 import MainTable from './MainTable';
 import './sass/style.scss';
 
@@ -29,7 +29,7 @@ function updateCharts(selectedCountry) {
   }
 }
 
-function setTables(data) {
+function setTables() {
   const global = requestForAPI.getCountriesAndCases();
   table.setGlobalCases(global);
 
@@ -51,7 +51,7 @@ function startApp() {
 }
 
 function update() {
-  table.clearTables();
+  Tables.clearTables();
   requestForAPI.sortData();
   setTables(requestForAPI.data);
   map.updateData(requestForAPI.getCountriesWithLatLonAndCases());
@@ -63,7 +63,7 @@ function setupResizeButtons() {
   const buttons = global.document.querySelectorAll('.expand');
 
   buttons.forEach((el) =>
-    el.addEventListener('click', function () {
+    el.addEventListener('click', () => {
       this.parentElement.classList.toggle('expanded');
     })
   );
