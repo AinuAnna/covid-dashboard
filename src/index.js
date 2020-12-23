@@ -4,12 +4,14 @@ import Charts from './chart';
 import Map from './Map';
 import Toggles from './toggles';
 import search from './search';
+import MainTable from './MainTable';
 import './sass/style.scss';
 
 const table = new Tables();
 const chart = new Charts();
 const map = new Map();
 const requestForAPI = new RequestForAPI();
+const mainTable = new MainTable();
 
 Toggles.createToggles();
 
@@ -34,12 +36,12 @@ function setTables(data) {
   table.setCasesByCountry(global);
 
   const deaths = requestForAPI.getDeathsCases();
-  table.setGlobalDeathsCases(deaths);
-  table.setCasesByDeaths(deaths);
+  /*  table.setGlobalDeathsCases(deaths);
+  table.setCasesByDeaths(deaths); */
 
   const recovered = requestForAPI.getRecoveredCases();
-  table.setGlobalRecoveredCases(recovered);
-  table.setCasesByRecovered(recovered);
+  /* table.setGlobalRecoveredCases(recovered);
+  table.setCasesByRecovered(recovered); */
 
   const updated = requestForAPI.getLastDate();
   table.setLastDate(updated);
@@ -50,6 +52,7 @@ function startApp() {
     requestForAPI.setData(data);
     requestForAPI.sortData();
     setTables(data);
+    mainTable.updateData(...requestForAPI.getDataForTable('Global'));
     map.updateData(requestForAPI.getCountriesWithLatLonAndCases());
     updateCharts();
   });
@@ -59,6 +62,7 @@ function update() {
   requestForAPI.sortData();
   setTables(requestForAPI.data);
   map.updateData(requestForAPI.getCountriesWithLatLonAndCases());
+  mainTable.updateData(...requestForAPI.getDataForTable());
 }
 
 function setupResizeButtons() {
@@ -75,6 +79,7 @@ function onClickCountry() {
   elements.addEventListener('click', (event) => {
     const selectedCountry = event.target.closest('div').dataset.country;
     updateCharts(selectedCountry);
+    mainTable.updateData(...requestForAPI.getDataForTable(selectedCountry));
   });
 }
 
