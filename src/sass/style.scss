@@ -220,6 +220,9 @@ footer {
     width: 100%;
     margin-top: 25px;
     height: calc(100vh - 155px);
+    @media (max-width: 900px) {
+      height: 500px;
+    }
     .expand {
       margin-left: 8px;
     }
@@ -413,7 +416,7 @@ footer {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  min-height: 100px;
+  min-height: 200px;
   tr {
     padding: 10px;
   }
