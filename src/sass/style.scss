@@ -130,6 +130,18 @@ footer {
       height: 400px;
     }
   }
+  & .country__table {
+    cursor: pointer;
+    border-bottom: 1px solid #616ed459;
+    padding: 5px 7px 5px 7px;
+
+    &:hover {
+      background-color: #f9b54fcb;
+    }
+  }
+  & .country__table.hide {
+    display: none;
+  }
   &.date {
     margin-top: 0.5rem;
     text-align: center;
@@ -169,6 +181,10 @@ footer {
       width: 100%;
     }
   }
+}
+.country__table {
+  display: flex;
+  justify-content: space-between;
 }
 .content-box {
   #deaths {
