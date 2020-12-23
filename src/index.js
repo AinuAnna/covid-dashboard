@@ -35,14 +35,6 @@ function setTables(data) {
 
   table.setCasesByCountry(global);
 
-  const deaths = requestForAPI.getDeathsCases();
-  /*  table.setGlobalDeathsCases(deaths);
-  table.setCasesByDeaths(deaths); */
-
-  const recovered = requestForAPI.getRecoveredCases();
-  /* table.setGlobalRecoveredCases(recovered);
-  table.setCasesByRecovered(recovered); */
-
   const updated = requestForAPI.getLastDate();
   table.setLastDate(updated);
 }
@@ -63,6 +55,7 @@ function update() {
   setTables(requestForAPI.data);
   map.updateData(requestForAPI.getCountriesWithLatLonAndCases());
   mainTable.updateData(...requestForAPI.getDataForTable());
+  mainTable.updateViewDivs(requestForAPI.currentIndicator, requestForAPI.isGlobal);
 }
 
 function setupResizeButtons() {

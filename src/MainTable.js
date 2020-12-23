@@ -13,6 +13,25 @@ export default class MainTable {
     this.divTodayRecovered.innerHTML = `+${todayRecovered}`;
   }
 
+  updateViewDivs(currentIndicator, isGlobal) {
+    this.arrAllDiv.map((el) => el.classList.remove('field-select'));
+    switch (currentIndicator) {
+      case 'cases':
+        isGlobal ? this.divCases.classList.add('field-select') : this.divTodayCases.classList.add('field-select');
+        break;
+      case 'deaths':
+        isGlobal ? this.divDeaths.classList.add('field-select') : this.divTodayDeaths.classList.add('field-select');
+        break;
+      case 'recovered':
+        isGlobal
+          ? this.divRecovered.classList.add('field-select')
+          : this.divTodayRecovered.classList.add('field-select');
+        break;
+      default:
+        break;
+    }
+  }
+
   findAllId() {
     this.currentCountry = document.getElementById('current-country');
     this.divCases = document.getElementById('table-cases');
@@ -21,5 +40,14 @@ export default class MainTable {
     this.divTodayCases = document.getElementById('table-today-cases');
     this.divTodayDeaths = document.getElementById('table-today-deaths');
     this.divTodayRecovered = document.getElementById('table-today-recovered');
+    this.divCases.classList.add('field-select');
+    this.arrAllDiv = [
+      this.divCases,
+      this.divDeaths,
+      this.divRecovered,
+      this.divTodayCases,
+      this.divTodayDeaths,
+      this.divTodayRecovered,
+    ];
   }
 }
