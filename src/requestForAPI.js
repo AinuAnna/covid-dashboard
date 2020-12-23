@@ -183,4 +183,47 @@ export default class RequestForAPI {
     this.currentIndicator = this.indicators[currentIndex];
     return this.currentIndicator[0].toUpperCase() + this.currentIndicator.slice(1);
   }
+
+  getDataOfCountry(currentCountry, indicator, coefficient) {
+    return this.isAbsoluteValue
+      ? currentCountry[indicator]
+      : (coefficient !== 0 ? currentCountry[indicator] / coefficient : 1).toFixed(4);
+  }
+
+  getSumGlobalData(indicator) {
+    return this.data.reduce((acc, cur) => (cur[indicator] ? acc + cur[indicator] : acc), 0);
+  }
+
+  getDataForTable(currentCountry) {
+    let cases;
+    let deaths;
+    let recovered;
+    let todayCases;
+    let todayDeaths;
+    let todayRecovered;
+
+    if (currentCountry === 'Global' || (currentCountry === undefined && this.currentCountry === undefined)) {
+      this.currentCountry = undefined;
+      cases = this.getSumGlobalData('cases');
+      deaths = this.getSumGlobalData('deaths');
+      recovered = this.getSumGlobalData('recovered');
+      todayCases = this.getSumGlobalData('todayCases');
+      todayDeaths = this.getSumGlobalData('todayDeaths');
+      todayRecovered = this.getSumGlobalData('todayRecovered');
+    } else {
+      this.currentCountry = currentCountry || this.currentCountry;
+      const country = this.data.filter((el) => this.currentCountry === el.country);
+      if (country[0] === undefined) return [];
+
+      const coefficient = RequestForAPI.getCoef100kPopulation(country[0]);
+      cases = this.getDataOfCountry(country[0], 'cases', coefficient);
+      deaths = this.getDataOfCountry(country[0], 'deaths', coefficient);
+      recovered = this.getDataOfCountry(country[0], 'recovered', coefficient);
+      todayCases = this.getDataOfCountry(country[0], 'todayCases', coefficient);
+      todayDeaths = this.getDataOfCountry(country[0], 'todayDeaths', coefficient);
+      todayRecovered = this.getDataOfCountry(country[0], 'todayRecovered', coefficient);
+    }
+
+    return [cases, deaths, recovered, todayCases, todayDeaths, todayRecovered, this.currentCountry];
+  }
 }

@@ -49,7 +49,7 @@ export default class Tables {
     this.createDivCases();
   }
 
-  createDivDeaths() {
+  /* createDivDeaths() {
     const TABLE = document.getElementById('deaths');
     for (let i = 0; i < this.dataByDeaths.length; i += 1) {
       const createDivDeaths = document.createElement('div');
@@ -58,9 +58,9 @@ export default class Tables {
       createDivDeaths.innerHTML = `<span>${this.dataByDeaths[i].deaths}</span><span>${this.dataByDeaths[i].country}</span>`;
       TABLE.appendChild(createDivDeaths);
     }
-  }
+  } */
 
-  setCasesByDeaths(cases) {
+  /* setCasesByDeaths(cases) {
     this.cases = cases;
     this.dataByDeaths = cases.map((item) => {
       return {
@@ -70,8 +70,8 @@ export default class Tables {
     });
     this.createDivDeaths();
   }
-
-  setGlobalDeathsCases(deaths) {
+ */
+  /* setGlobalDeathsCases(deaths) {
     this.deaths = deaths;
     this.dataByDeaths = deaths.reduce((acc, item) => {
       if (item.deaths === null && undefined) {
@@ -79,10 +79,10 @@ export default class Tables {
       }
       return acc + item.deaths;
     }, 0);
-    this.updateTotal('.global-deaths', this.dataByDeaths);
-  }
+    // this.updateTotal('.global-deaths', this.dataByDeaths);
+  } */
 
-  createDivRecovered() {
+  /* createDivRecovered() {
     const TABLE = document.getElementById('recovered');
     for (let i = 0; i < this.dataByRecovered.length; i += 1) {
       const createDivRecovered = document.createElement('div');
@@ -91,9 +91,9 @@ export default class Tables {
       createDivRecovered.innerHTML = `<span>${this.dataByRecovered[i].recovered}</span><span>${this.dataByRecovered[i].country}</span>`;
       TABLE.appendChild(createDivRecovered);
     }
-  }
+  } */
 
-  setCasesByRecovered(cases) {
+  /* setCasesByRecovered(cases) {
     this.cases = cases;
     this.dataByRecovered = cases.map((item) => {
       return {
@@ -102,9 +102,9 @@ export default class Tables {
       };
     });
     this.createDivRecovered();
-  }
+  } */
 
-  setGlobalRecoveredCases(recovered) {
+  /* setGlobalRecoveredCases(recovered) {
     this.recovered = recovered;
     this.dataByRecovered = recovered.reduce((acc, item) => {
       if (item.recovered === null && undefined) {
@@ -113,7 +113,7 @@ export default class Tables {
       return acc + item.recovered;
     }, 0);
     this.updateTotal('.global-recovered', this.dataByRecovered);
-  }
+  } */
 
   createDivDate(element) {
     const TABLE = document.getElementById('last-date');
