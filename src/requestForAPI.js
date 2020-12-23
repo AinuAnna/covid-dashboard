@@ -63,31 +63,15 @@ export default class RequestForAPI {
   }
 
   getCountriesAndCases() {
-    return this.data.map((el) => {
-      return {
-        cases: this.getDataDependOnToggles(el),
-        country: el.country,
-        countryInfo: [el.countryInfo.flag],
-      };
-    });
-  }
-
-  getDeathsCases() {
-    return this.data.map((el) => {
-      return {
-        deaths: el.deaths,
-        country: el.country,
-      };
-    });
-  }
-
-  getRecoveredCases() {
-    return this.data.map((el) => {
-      return {
-        recovered: el.recovered,
-        country: el.country,
-      };
-    });
+    return this.data
+      .map((el) => {
+        return {
+          cases: this.getDataDependOnToggles(el),
+          country: el.country,
+          countryInfo: [el.countryInfo.flag],
+        };
+      })
+      .sort((a, b) => b.cases - a.cases);
   }
 
   getLastDate() {
@@ -213,8 +197,6 @@ export default class RequestForAPI {
     } else {
       this.currentCountry = currentCountry || this.currentCountry;
       const country = this.data.filter((el) => this.currentCountry === el.country);
-      if (country[0] === undefined) return [];
-
       const coefficient = RequestForAPI.getCoef100kPopulation(country[0]);
       cases = this.getDataOfCountry(country[0], 'cases', coefficient);
       deaths = this.getDataOfCountry(country[0], 'deaths', coefficient);
