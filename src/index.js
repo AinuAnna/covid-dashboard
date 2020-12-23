@@ -56,6 +56,7 @@ function startApp() {
 }
 
 function update() {
+  table.clearTables();
   requestForAPI.sortData();
   setTables(requestForAPI.data);
   map.updateData(requestForAPI.getCountriesWithLatLonAndCases());

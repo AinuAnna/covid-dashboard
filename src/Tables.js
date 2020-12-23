@@ -129,4 +129,11 @@ export default class Tables {
     });
     this.createDivDate();
   }
+
+  clearTables() {
+    const clearTables = document.getElementById('cases-by-country'); // deaths, recovered
+    while (clearTables.firstChild) {
+      clearTables.removeChild(clearTables.firstChild);
+    }
+  }
 }
