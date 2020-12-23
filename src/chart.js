@@ -36,7 +36,7 @@ export default class Charts {
           display: true,
           position: 'bottom',
           labels: {
-            fontSize: 16,
+            fontSize: '14',
             fontStyle: 'normal',
             fontColor: '#f1f3fb',
           },
