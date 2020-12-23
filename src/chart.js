@@ -27,6 +27,7 @@ export default class Charts {
       ...CHART_DATA,
       responsive: true,
       maintainAspectRatio: true,
+      aspectRatio: 3,
       type: 'line',
       data: {
         labels: this.days,
