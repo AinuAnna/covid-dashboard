@@ -21,8 +21,7 @@ export default class Charts {
   render() {
     let CHART = global.document.getElementById('myChart').getContext('2d');
     global.document.getElementById('myChart').remove();
-    global.document.querySelector('.redraw').innerHTML = `<span class="content-box__title">Daily Cases</span>
-    <canvas id="myChart" class="chart"></canvas>`;
+    global.document.querySelector('.redraw').innerHTML = `<canvas id="myChart"  class="chart"></canvas>`;
     CHART = global.document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(CHART, {
       ...CHART_DATA,
@@ -32,11 +31,13 @@ export default class Charts {
         datasets: this.chartData,
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         legend: {
           display: true,
           position: 'bottom',
           labels: {
-            fontSize: 16,
+            fontSize: 12,
             fontStyle: 'normal',
             fontColor: '#f1f3fb',
           },
@@ -57,7 +58,7 @@ export default class Charts {
               position: 'bottom',
               ticks: {
                 fontColor: '#f1f3fb',
-                fontSize: 14,
+                fontSize: 12,
                 fontStyle: 'normal',
               },
               time: {
@@ -72,7 +73,7 @@ export default class Charts {
               ticks: {
                 beginAtZero: true,
                 fontColor: '#f1f3fb',
-                fontSize: 14,
+                fontSize: 12,
                 fontStyle: 'normal',
               },
             },

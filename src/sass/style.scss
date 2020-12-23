@@ -13,6 +13,8 @@
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin: 0;
+
+  font-size: 14px;
   line-height: 1.5;
   font-weight: 400;
   background: #222;
@@ -46,7 +48,8 @@ footer {
   justify-content: space-between;
   height: calc(100vh - 120px);
   margin: 0.5rem 0;
-  @media only screen and (max-width: 720px) {
+
+  @media (max-width: 900px) {
     flex-direction: column;
     width: 100%;
     height: 100%;
@@ -58,44 +61,35 @@ footer {
 }
 .container__left {
   width: 23em;
-  @media only screen and (max-width: 720px) {
+  @media (max-width: 900px) {
     width: 100%;
   }
 }
 .container__right {
-  width: 37em;
-  @media only screen and (max-width: 720px) {
+  width: 31em;
+  @media (max-width: 900px) {
     width: 100%;
+    margin-top: 0.5rem;
   }
   .tables .content-box:first-child {
     margin-right: 0.5rem;
   }
 
-  @media only screen and (max-width: 720px) {
+  @media (max-width: 900px) {
     .tables .content-box {
       margin-top: 0.5rem;
     }
   }
 }
-.container__right > div {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  height: 60%;
-  @media only screen and (max-width: 720px) {
-    display: inline;
-    width: 100%;
-  }
-}
+
 .container .map {
-  // position: relative;
   flex: 1;
   margin: 0 0.5rem;
   background: #2a2f43;
   flex-grow: 3;
   overflow: hidden;
-  @media only screen and (max-width: 720px) {
-    height: 400px;
+  @media (max-width: 900px) {
+    height: 607px;
     margin-top: 0.5rem;
     margin: 0;
   }
@@ -108,11 +102,12 @@ footer {
   background: #2a2f43;
   border: 1px solid #616ed4;
   overflow: hidden;
+
   &.global {
-    height: 10rem;
     margin-bottom: 0.5rem;
     text-align: center;
-    @media only screen and (max-width: 720px) {
+    height: 10rem;
+    @media (max-width: 900px) {
       height: 110px;
     }
   }
@@ -131,13 +126,11 @@ footer {
       position: sticky;
       height: 23px;
     }
-    @media only screen and (max-width: 720px) {
+    @media (max-width: 900px) {
       height: 400px;
     }
   }
-  & .country__table,
-  .deaths__table,
-  .recovered__table {
+  & .country__table {
     cursor: pointer;
     border-bottom: 1px solid #616ed459;
     padding: 5px 7px 5px 7px;
@@ -150,10 +143,10 @@ footer {
     display: none;
   }
   &.date {
-    height: 8rem;
     margin-top: 0.5rem;
     text-align: center;
-    @media only screen and (max-width: 720px) {
+    height: 10rem;
+    @media (max-width: 900px) {
       height: 110px;
       margin-bottom: 0.5rem;
     }
@@ -180,6 +173,9 @@ footer {
     left: 0;
     padding-left: 8px;
     margin: 0;
+    @media (max-width: 900px) {
+      height: 100%;
+    }
     #deaths,
     #recovered {
       width: 100%;
@@ -196,7 +192,7 @@ footer {
     height: calc(100% - 105px);
     overflow: auto;
     text-align: center;
-    @media only screen and (max-width: 720px) {
+    @media (max-width: 900px) {
       height: 400px;
       margin-top: 0.5rem;
       width: 100%;
@@ -211,16 +207,26 @@ footer {
     margin: auto 20%;
     width: auto;
     height: calc(100vh - 227px);
-    @media only screen and (max-width: 720px) {
+    &.toggle {
+      @media (max-width: 900px) {
+        margin: 0;
+      }
+    }
+    @media (max-width: 900px) {
       width: 100%;
       margin: 0;
-      margin-top: 25px;
+      margin-top: 0.5rem;
       height: calc(100vh - 227px);
+      margin-bottom: 0.5rem;
     }
   }
   #map {
     width: 100%;
     margin-top: 25px;
+    height: calc(100vh - 227px);
+    @media (max-width: 900px) {
+      height: 500px;
+    }
     height: calc(100vh - 227px);
     .expand {
       margin-left: 8px;
@@ -235,11 +241,12 @@ footer {
   font-size: 2em;
   color: #f9b64f;
   margin-bottom: 10px;
-}
-.deaths__table,
-.recovered__table {
-  display: flex;
-  justify-content: space-between;
+  @media (max-width: 1000px) {
+    font-size: 1.5rem;
+  }
+  @media (max-height: 900px) {
+    font-size: 1.5rem;
+  }
 }
 .content-box {
   #recovered {
@@ -248,23 +255,38 @@ footer {
     overflow: auto;
     text-align: center;
 
-    @media only screen and (max-width: 720px) {
+    @media (max-width: 900px) {
       margin-top: 0.5rem;
       height: 400px;
       width: 100%;
     }
   }
 }
-.chart {
-  margin-top: 0.5rem;
-  width: 37em;
-  height: calc(100% - 8px);
+.content-box.chart {
+  display: flex;
+  flex-direction: column;
+  .chart-container {
+    flex: 1 1 auto;
+    position: relative;
+    .redraw {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+    @media (max-width: 900px) {
+      height: 10rem;
+    }
+  }
+}
+.container__right .chart {
   overflow: hidden;
   text-align: center;
-
-  @media only screen and (max-width: 720px) {
-    margin-top: 0.5rem;
-    width: 100%;
+}
+.content-box {
+  &.expanded .redraw {
+    margin: 5% 20%;
   }
 }
 .expand {
@@ -282,16 +304,11 @@ footer {
 }
 .content-box__title {
   color: #109e92;
-  font-size: 20px;
+  font-size: 1.2rem;
   font-weight: bold;
   margin: auto 23px;
   display: flex;
   justify-content: center;
-}
-/* CHART */
-.chart {
-  max-width: 100%;
-  max-height: 800px;
 }
 /* FOOTER */
 footer {
@@ -355,9 +372,10 @@ footer {
 }
 .map > .toggles {
   position: absolute;
+  margin: 0;
 }
 .toggles {
-  position: sticky;
+  position: absolute;
   z-index: 99;
   bottom: 0;
   right: 0;
@@ -395,7 +413,7 @@ footer {
       .toggle-button {
         @include button;
         width: 3.75rem;
-        height: 2rem;
+        height: 1.5rem;
         margin: 0;
         background: #78909c;
         color: #b4bbbe;
@@ -413,8 +431,8 @@ footer {
     }
   }
 }
-.tables {
-  position: relative;
+.content-box.tables {
+  margin-bottom: 0.5rem;
   .toggles {
     position: absolute;
   }
@@ -425,7 +443,7 @@ footer {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  font-size: 1.1rem;
+  min-height: 200px;
   tr {
     padding: 10px;
   }
@@ -449,9 +467,20 @@ footer {
   }
   #current-country {
     font-weight: 700;
+    color: #f9b64f;
+  }
+  #table-cases,
+  #table-deaths,
+  #table-recovered,
+  #table-today-cases,
+  #table-today-deaths,
+  #table-today-recovered {
+    text-align: center;
   }
 }
-
+.active {
+  background-color: #f9b54fe7;
+}
 .field-select {
   background: rgba($color: #f9b54fcb, $alpha: 0.3);
   border-radius: 10px;
