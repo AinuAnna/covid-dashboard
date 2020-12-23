@@ -275,14 +275,14 @@ footer {
       right: 0;
       bottom: 0;
     }
+    @media (max-width: 900px) {
+      height: 10rem;
+    }
   }
 }
 .container__right .chart {
   overflow: hidden;
   text-align: center;
-  @media (max-width: 900px) {
-    width: 100%;
-  }
 }
 .content-box {
   &.expanded .redraw {
