@@ -1,5 +1,5 @@
 const moment = require('moment');
-// require
+
 export default class Tables {
   constructor() {
     this.dataByCases = [];
@@ -7,6 +7,7 @@ export default class Tables {
     this.dataByRecovered = [];
     this.cases = null;
     this.lastDate = 0;
+    this.stylesForFlag = '" width="25" height="12.5"';
   }
 
   static updateTotal(className, value) {
@@ -31,7 +32,7 @@ export default class Tables {
       const createDivCases = document.createElement('div');
       createDivCases.className = 'country__table';
       createDivCases.setAttribute('data-country', this.dataByCases[i].country);
-      createDivCases.innerHTML = `<span>${this.dataByCases[i].cases}</span><span>${this.dataByCases[i].country}  <img src="${this.dataByCases[i].countryInfo}" alt="${this.dataByCases[i].country}" width="25" height="15" /></span>`;
+      createDivCases.innerHTML = `<span>${this.dataByCases[i].cases}</span><span>${this.dataByCases[i].country}  <img src="${this.dataByCases[i].countryInfo}" alt="${this.dataByCases[i].country}${this.stylesForFlag}/></span>`;
       TABLE.appendChild(createDivCases);
     }
   }
@@ -45,7 +46,6 @@ export default class Tables {
         countryInfo: item.countryInfo,
       };
     });
-    this.createDivCases();
   }
 
   static createDivDate(element) {
@@ -60,7 +60,6 @@ export default class Tables {
         updated: item.updated,
       };
     });
-    Tables.createDivDate();
   }
 
   static clearTables() {

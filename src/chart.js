@@ -6,6 +6,7 @@ export default class Charts {
   constructor() {
     this.days = [];
     this.chartData = [];
+    this.myChart = [];
   }
 
   setData(data) {
@@ -23,7 +24,7 @@ export default class Charts {
     global.document.getElementById('myChart').remove();
     global.document.querySelector('.redraw').innerHTML = `<canvas id="myChart"  class="chart"></canvas>`;
     CHART = global.document.getElementById('myChart').getContext('2d');
-    const myChart = new Chart(CHART, {
+    this.myChart = new Chart(CHART, {
       ...CHART_DATA,
       type: 'line',
       data: {

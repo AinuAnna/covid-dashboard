@@ -34,6 +34,8 @@ function setTables() {
   table.setGlobalCases(global);
 
   table.setCasesByCountry(global);
+  table.createDivCases();
+  Tables.createDivDate();
 
   const updated = requestForAPI.getLastDate();
   table.setLastDate(updated);
