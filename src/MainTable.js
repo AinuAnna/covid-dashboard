@@ -13,19 +13,21 @@ export default class MainTable {
     this.divTodayRecovered.innerHTML = `+${todayRecovered}`;
   }
 
+  static addSelectedClassTo(element) {
+    element.classList.add('field-select');
+  }
+
   updateViewDivs(currentIndicator, isGlobal) {
     this.arrAllDiv.map((el) => el.classList.remove('field-select'));
     switch (currentIndicator) {
       case 'cases':
-        isGlobal ? this.divCases.classList.add('field-select') : this.divTodayCases.classList.add('field-select');
+        this.addSelectedClassTo(isGlobal ? this.divRecovered : this.divTodayRecovered);
         break;
       case 'deaths':
-        isGlobal ? this.divDeaths.classList.add('field-select') : this.divTodayDeaths.classList.add('field-select');
+        this.addSelectedClassTo(isGlobal ? this.divRecovered : this.divTodayRecovered);
         break;
       case 'recovered':
-        isGlobal
-          ? this.divRecovered.classList.add('field-select')
-          : this.divTodayRecovered.classList.add('field-select');
+        this.addSelectedClassTo(isGlobal ? this.divRecovered : this.divTodayRecovered);
         break;
       default:
         break;

@@ -63,7 +63,7 @@ export default class Tables {
   }
 
   static clearTables() {
-    const clearTables = document.getElementById('cases-by-country'); // deaths, recovered
+    const clearTables = document.getElementById('cases-by-country');
     while (clearTables.firstChild) {
       clearTables.removeChild(clearTables.firstChild);
     }
