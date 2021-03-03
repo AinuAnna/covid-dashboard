@@ -1,0 +1,487 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@mixin button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  color: #fff;
+}
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 0;
+
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 400;
+  background: #222;
+  color: rgb(235, 235, 235);
+}
+
+h1 {
+  color: #ffffff;
+  font-size: 20px;
+  text-align: center;
+}
+
+header,
+footer,
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header,
+footer {
+  height: 50px;
+  background: #2a2f43;
+  border: 1px solid #616ed4;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: calc(100vh - 120px);
+  margin: 0.5rem 0;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+}
+.container > section {
+  flex-direction: column;
+  justify-content: center;
+}
+.container__left {
+  width: 23em;
+  @media (max-width: 900px) {
+    width: 100%;
+  }
+}
+.container__right {
+  width: 31em;
+  @media (max-width: 900px) {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  .tables .content-box:first-child {
+    margin-right: 0.5rem;
+  }
+
+  @media (max-width: 900px) {
+    .tables .content-box {
+      margin-top: 0.5rem;
+    }
+  }
+}
+
+.container .map {
+  flex: 1;
+  margin: 0 0.5rem;
+  background: #2a2f43;
+  flex-grow: 3;
+  overflow: hidden;
+  @media (max-width: 900px) {
+    height: 607px;
+    margin-top: 0.5rem;
+    margin: 0;
+  }
+}
+.content-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0 0.5rem;
+  background: #2a2f43;
+  border: 1px solid #616ed4;
+  overflow: hidden;
+
+  &.global {
+    margin-bottom: 0.5rem;
+    text-align: center;
+    height: 10rem;
+    @media (max-width: 900px) {
+      height: 110px;
+    }
+  }
+  .cases-by-country-filter {
+    margin-bottom: 5px;
+  }
+  #cases-by-country {
+    height: calc(100% - 140px);
+    overflow: auto;
+    text-align: center;
+  }
+  &.country {
+    #search-country {
+      width: 100%;
+      background-color: #ffffffcb;
+      position: sticky;
+      height: 23px;
+    }
+    @media (max-width: 900px) {
+      height: 400px;
+    }
+  }
+  & .country__table {
+    cursor: pointer;
+    border-bottom: 1px solid #616ed459;
+    padding: 5px 7px 5px 7px;
+
+    &:hover {
+      background-color: #f9b54fcb;
+    }
+  }
+  & .country__table.hide {
+    display: none;
+  }
+  &.date {
+    margin-top: 0.5rem;
+    text-align: center;
+    height: 10rem;
+    @media (max-width: 900px) {
+      height: 110px;
+      margin-bottom: 0.5rem;
+    }
+  }
+  &.expanded .expand {
+    background: url(../assets/collapse.svg) center center no-repeat;
+    margin-right: 20px;
+    margin-top: 4px;
+    height: 16px;
+    width: 16px;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+  &.expanded {
+    z-index: 9999999;
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: calc(100vh - 119px);
+    top: 58px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding-left: 8px;
+    margin: 0;
+    @media (max-width: 900px) {
+      height: 100%;
+    }
+    #deaths,
+    #recovered {
+      width: 100%;
+    }
+  }
+}
+.country__table {
+  display: flex;
+  justify-content: space-between;
+}
+.content-box {
+  #deaths {
+    width: 17.2em;
+    height: calc(100% - 105px);
+    overflow: auto;
+    text-align: center;
+    @media (max-width: 900px) {
+      height: 400px;
+      margin-top: 0.5rem;
+      width: 100%;
+    }
+  }
+  :first-child {
+    text-align: center;
+  }
+}
+.content-box {
+  &.expanded #map {
+    margin: auto 20%;
+    width: auto;
+    height: calc(100vh - 227px);
+    &.toggle {
+      @media (max-width: 900px) {
+        margin: 0;
+      }
+    }
+    @media (max-width: 900px) {
+      width: 100%;
+      margin: 0;
+      margin-top: 0.5rem;
+      height: calc(100vh - 227px);
+      margin-bottom: 0.5rem;
+    }
+  }
+  #map {
+    width: 100%;
+    margin-top: 25px;
+    height: calc(100vh - 227px);
+    @media (max-width: 900px) {
+      height: 500px;
+    }
+    height: calc(100vh - 227px);
+    .expand {
+      margin-left: 8px;
+    }
+  }
+}
+.global-deaths,
+.global-recovered,
+.global-cases,
+#last-date {
+  text-align: center;
+  font-size: 2em;
+  color: #f9b64f;
+  margin-bottom: 10px;
+  @media (max-width: 1000px) {
+    font-size: 1.5rem;
+  }
+  @media (max-height: 900px) {
+    font-size: 1.5rem;
+  }
+}
+.content-box {
+  #recovered {
+    width: 17em;
+    height: calc(100% - 105px);
+    overflow: auto;
+    text-align: center;
+
+    @media (max-width: 900px) {
+      margin-top: 0.5rem;
+      height: 400px;
+      width: 100%;
+    }
+  }
+}
+.content-box.chart {
+  display: flex;
+  flex-direction: column;
+  .chart-container {
+    flex: 1 1 auto;
+    position: relative;
+    .redraw {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+    @media (max-width: 900px) {
+      height: 10rem;
+    }
+  }
+}
+.container__right .chart {
+  overflow: hidden;
+  text-align: center;
+}
+.content-box {
+  &.expanded .redraw {
+    margin: 5% 20%;
+  }
+}
+.expand {
+  position: sticky;
+  top: 10px;
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+  background: url(../assets/expand.svg) center center no-repeat;
+  transition: opacity 0.25s ease-out;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+.content-box__title {
+  color: #109e92;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: auto 23px;
+  display: flex;
+  justify-content: center;
+}
+/* FOOTER */
+footer {
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  ul {
+    margin: 0;
+    padding: 4px;
+  }
+  li {
+    display: inline;
+    margin-right: 5px;
+    padding: 3px;
+  }
+
+  a {
+    text-decoration: none;
+    color: #fff;
+
+    &:hover {
+      color: #f9b64f;
+    }
+  }
+}
+.footer__RS-logo {
+  width: 5rem;
+  height: 2rem;
+  padding: 2px;
+}
+.footer__RS-logo:hover {
+  opacity: 0.8;
+}
+
+.map-info {
+  font-size: 1.4rem;
+  font-weight: 700;
+  background: rgba($color: #000000, $alpha: 0.2);
+  border-radius: 0.5rem;
+  padding: 0.2rem;
+}
+
+.map-legend {
+  line-height: 18px;
+  color: #555;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+  background: rgba($color: #ffffff, $alpha: 0.3);
+
+  &__container {
+    display: flex;
+    padding: 0.2rem;
+  }
+  & i {
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: 8px;
+    opacity: 0.7;
+  }
+}
+.map > .toggles {
+  position: absolute;
+  margin: 0;
+}
+.toggles {
+  position: absolute;
+  z-index: 99;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  background: rgba($color: rgb(27, 27, 27), $alpha: 0.9);
+
+  .toggle-indicator {
+    display: flex;
+    height: 2rem;
+
+    .toggle-button-back,
+    .toggle-button-forth {
+      @include button;
+      width: 10%;
+      background: none;
+      &:hover {
+        background-color: rgba($color: #ffffff, $alpha: 0.3);
+      }
+      &:active {
+        opacity: 0.8;
+      }
+    }
+    .current-indicator {
+      width: 80%;
+      text-align: center;
+    }
+  }
+  .toggles-group {
+    display: flex;
+    justify-content: space-between;
+
+    .toggle-simple {
+      .toggle-button {
+        @include button;
+        width: 3.75rem;
+        height: 1.5rem;
+        margin: 0;
+        background: #78909c;
+        color: #b4bbbe;
+        &:hover {
+          background: #109e92;
+        }
+        &:active {
+          background: #075e56;
+        }
+      }
+      .toggle-active {
+        background: #109e9279;
+        color: #fff;
+      }
+    }
+  }
+}
+.content-box.tables {
+  margin-bottom: 0.5rem;
+  .toggles {
+    position: absolute;
+  }
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 200px;
+  tr {
+    padding: 10px;
+  }
+  td,
+  th {
+    width: 200px;
+    padding: 4px 10px;
+    text-align: center;
+  }
+
+  &__subtitle {
+    color: #109e92;
+    font-weight: 400;
+  }
+  .global-data {
+    font-weight: 500;
+  }
+  .today-data {
+    font-weight: 400;
+    font-size: 15px;
+  }
+  #current-country {
+    font-weight: 700;
+    color: #f9b64f;
+  }
+  #table-cases,
+  #table-deaths,
+  #table-recovered,
+  #table-today-cases,
+  #table-today-deaths,
+  #table-today-recovered {
+    text-align: center;
+  }
+}
+.active {
+  background-color: #f9b54fe7;
+}
+.field-select {
+  background: rgba($color: #f9b54fcb, $alpha: 0.3);
+  border-radius: 10px;
+}
